@@ -1,0 +1,64 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #f472b6);
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+.navbar:hover {
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+.logo a {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: white;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-btn {
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  font-weight: bold;
+  background-color: rgba(255,255,255,0.2);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+  background-color: rgba(255,255,255,0.4);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.nav-btn.secondary {
+  background-color: #fbbf24;
+  color: white;
+}
+
+.nav-btn.secondary:hover {
+  background-color: #f59e0b;
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.nav-btn.logout {
+  background-color: #ef4444;
+}
+
+.nav-btn.logout:hover {
+  background-color: #dc2626;
+  transform: translateY(-2px) scale(1.05);
+}

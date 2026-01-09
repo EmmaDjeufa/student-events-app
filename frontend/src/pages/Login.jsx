@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { apiRequest } from '../api/api'
 import { useNavigate } from 'react-router-dom'
+import '../index.css'
 
 function Login() {
   const [email, setEmail] = useState('')
@@ -12,49 +13,25 @@ function Login() {
     e.preventDefault()
     setError('')
 
-    const data = await apiRequest('/auth/login', 'POST', {
-      email,
-      password
-    })
+    try {
+      const data = await apiRequest('/auth/login', 'POST', { email, password })
+        if (data.token) {
+          localStorage.setItem('token', data.token)
+          navigate('/events/add')  // redirige vers ajout d'évènement
+        }
 
-    if (data.token) {
-      localStorage.setItem('token', data.token)
-      navigate('/dashboard')
-    } else {
-      setError(data.message || 'Login failed')
+            } catch (err) {
+      setError('Une erreur est survenue. Réessayez.')
     }
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="max-w-md mx-auto bg-white p-6 rounded shadow"
-    >
-      <h1 className="text-2xl font-bold mb-4">Login</h1>
-
-      {error && <p className="text-red-500 mb-2">{error}</p>}
-
-      <input
-        type="email"
-        placeholder="Email"
-        className="border p-2 w-full mb-3"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-
-      <input
-        type="password"
-        placeholder="Password"
-        className="border p-2 w-full mb-4"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-
-      <button
-        className="bg-blue-600 text-white w-full py-2 rounded hover:bg-blue-700"
-      >
-        Login
-      </button>
+    <form onSubmit={handleSubmit} className="form-container">
+      <h1 className="title">Connexion</h1>
+      {error && <p className="text-red">{error}</p>}
+      <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
+      <input type="password" placeholder="Mot de passe" value={password} onChange={e => setPassword(e.target.value)} />
+      <button type="submit" className="btn btn-primary">Connexion</button>
     </form>
   )
 }

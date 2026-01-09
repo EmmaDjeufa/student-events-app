@@ -3,9 +3,16 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const Joi = require('joi')
 const pool = require('../config/db')
+const User = require('../models/User')
 
 const router = express.Router()
 
+// Vérification existence utilisateur
+router.get('/check-user', async (req, res) => {
+  const { email } = req.query
+  const user = await User.findOne({ email })
+  res.json({ exists: !!user })
+})
 const schema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string().email().required(),

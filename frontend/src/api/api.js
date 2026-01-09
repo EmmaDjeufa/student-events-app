@@ -1,4 +1,4 @@
-const API_URL = 'https://friendly-doodle-grrq94qggrxcwqgg-5173.app.github.dev/login'
+const API_URL = 'https://friendly-doodle-grrq94qggrxcwqgg-5000.app.github.dev/api'
 
 export async function apiRequest(path, method = 'GET', body = null) {
   const token = localStorage.getItem('token')
@@ -11,6 +11,11 @@ export async function apiRequest(path, method = 'GET', body = null) {
     },
     body: body ? JSON.stringify(body) : null
   })
+
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}))
+    throw new Error(errorData.message || 'Erreur réseau')
+  }
 
   return res.json()
 }

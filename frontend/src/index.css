@@ -1,71 +1,191 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Couleurs personnalisées via CSS variables */
-:root {
-  --primary-color: #3b82f6;
-  --secondary-color: #fbbf24;
-  --accent-color: #10b981;
-  --bg-gradient-start: #fef9c3;
-  --bg-gradient-end: #bfdbfe;
+/* Reset & global */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Body et font */
 body {
   font-family: 'Inter', sans-serif;
-  background: linear-gradient(to bottom, var(--bg-gradient-start), var(--bg-gradient-end));
+  background: #f0f4f8;
+  color: #1f2937;
+  min-height: 100vh;
 }
 
-/* Boutons */
+button, input {
+  font-family: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Utility Buttons */
+.btn {
+  padding: 0.7rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
 .btn-primary {
-  @apply bg-primary text-white font-bold py-2 px-6 rounded-full shadow-lg transition-transform transform hover:-translate-y-1 hover:scale-105 hover:bg-blue-700;
+  background-color: #3b82f6;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #2563eb;
+  transform: translateY(-2px) scale(1.05);
 }
 
 .btn-secondary {
-  @apply bg-secondary text-white font-semibold py-2 px-6 rounded-full shadow-md transition-transform transform hover:-translate-y-1 hover:scale-105 hover:bg-yellow-500;
+  background-color: #fbbf24;
+  color: white;
 }
 
-
-/* Cartes événements */
-.event-card {
-  @apply bg-white rounded-xl shadow-lg p-4 transition-all duration-300 hover:shadow-2xl hover:scale-105;
+.btn-secondary:hover {
+  background-color: #f59e0b;
+  transform: translateY(-2px) scale(1.05);
 }
 
 /* Navbar */
-nav {
-  @apply sticky top-0 z-50 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white font-semibold shadow-xl;
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #f472b6);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-/* Liens navbar */
-nav a {
-  @apply px-3 py-1 rounded hover:bg-white hover:text-blue-500 transition-colors;
+.navbar .logo {
+  font-size: 1.5rem;
+  font-weight: 900;
 }
 
-/* Inputs / forms */
-input, textarea, select {
-  @apply border-2 border-gray-300 rounded-lg p-2 mb-3 w-full focus:border-primary-color focus:ring-1 focus:ring-primary-color outline-none;
+.nav-links {
+  display: flex;
+  gap: 1rem;
 }
 
-/* Page d'accueil */
+.nav-links button, .nav-links a {
+  text-decoration: none;
+  color: white;
+}
+
+/* Hero Home */
 .home-hero {
-  @apply flex flex-col items-center justify-center min-h-screen text-center bg-gradient-to-br from-yellow-200 via-pink-200 to-blue-200;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 70px);
+  text-align: center;
+  background: linear-gradient(135deg, #fef9c3, #bfdbfe);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  padding: 2rem;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .home-hero h1 {
-  @apply text-6xl font-extrabold mb-4 animate-bounce;
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+  color: #3b82f6;
+  animation: bounceText 2s infinite;
 }
 
 .home-hero p {
-  @apply text-xl mb-6 text-gray-800;
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
 }
 
-/* Boutons */
-button {
-  @apply transition-all duration-300;
+@keyframes bounceText {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
-button:hover {
-  @apply shadow-lg;
+/* Form Styles */
+form {
+  max-width: 400px;
+  margin: 2rem auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
 }
 
+form input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+}
+
+form button {
+  width: 100%;
+}
+.student-emoji {
+  font-size: 3rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+.home-hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  text-align: center;
+  background: linear-gradient(135deg, #fef9c3, #bfdbfe);
+  padding: 2rem;
+}
+
+.home-hero h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  animation: bounce 2s infinite;
+}
+
+.home-hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.home-buttons button {
+  margin: 0 0.5rem;
+  padding: 0.75rem 2rem;
+  border-radius: 9999px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.home-buttons button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
