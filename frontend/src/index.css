@@ -1,4 +1,71 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Couleurs personnalisées via CSS variables */
+:root {
+  --primary-color: #3b82f6;
+  --secondary-color: #fbbf24;
+  --accent-color: #10b981;
+  --bg-gradient-start: #fef9c3;
+  --bg-gradient-end: #bfdbfe;
+}
+
+/* Body et font */
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(to bottom, var(--bg-gradient-start), var(--bg-gradient-end));
+}
+
+/* Boutons */
+.btn-primary {
+  @apply bg-primary text-white font-bold py-2 px-6 rounded-full shadow-lg transition-transform transform hover:-translate-y-1 hover:scale-105 hover:bg-blue-700;
+}
+
+.btn-secondary {
+  @apply bg-secondary text-white font-semibold py-2 px-6 rounded-full shadow-md transition-transform transform hover:-translate-y-1 hover:scale-105 hover:bg-yellow-500;
+}
+
+
+/* Cartes événements */
+.event-card {
+  @apply bg-white rounded-xl shadow-lg p-4 transition-all duration-300 hover:shadow-2xl hover:scale-105;
+}
+
+/* Navbar */
+nav {
+  @apply sticky top-0 z-50 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white font-semibold shadow-xl;
+}
+
+/* Liens navbar */
+nav a {
+  @apply px-3 py-1 rounded hover:bg-white hover:text-blue-500 transition-colors;
+}
+
+/* Inputs / forms */
+input, textarea, select {
+  @apply border-2 border-gray-300 rounded-lg p-2 mb-3 w-full focus:border-primary-color focus:ring-1 focus:ring-primary-color outline-none;
+}
+
+/* Page d'accueil */
+.home-hero {
+  @apply flex flex-col items-center justify-center min-h-screen text-center bg-gradient-to-br from-yellow-200 via-pink-200 to-blue-200;
+}
+
+.home-hero h1 {
+  @apply text-6xl font-extrabold mb-4 animate-bounce;
+}
+
+.home-hero p {
+  @apply text-xl mb-6 text-gray-800;
+}
+
+/* Boutons */
+button {
+  @apply transition-all duration-300;
+}
+
+button:hover {
+  @apply shadow-lg;
+}
+

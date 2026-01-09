@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:5000/api'
+const API_URL = 'https://friendly-doodle-grrq94qggrxcwqgg-5173.app.github.dev/login'
 
 export async function apiRequest(path, method = 'GET', body = null) {
   const token = localStorage.getItem('token')
