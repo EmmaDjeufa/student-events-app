@@ -11,6 +11,7 @@ import EventDetail from './pages/EventDetail'
 import Dashboard from './pages/Dashboard'
 import Home from './pages/Home'
 
+
 function ProtectedRoute({ children }) {
   const token = localStorage.getItem('token')
   return token ? children : <Navigate to="/login" />
