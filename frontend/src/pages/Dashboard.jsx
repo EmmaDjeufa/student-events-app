@@ -1,11 +1,11 @@
+// Dashboard.jsx
 import { useEffect, useState } from 'react'
 import { apiRequest } from '../api/api'
-import EventForm from '../components/EventForm'
 import EventCard from '../components/EventCard'
+import '../pages/css/Dashboard.css'
 
-function Dashboard() {
+export default function Dashboard() {
   const [events, setEvents] = useState([])
-  const [editingEvent, setEditingEvent] = useState(null)
 
   async function loadEvents() {
     const data = await apiRequest('/events')
@@ -23,29 +23,19 @@ function Dashboard() {
   }
 
   return (
-    <div className="p-6 space-y-6">
-      <EventForm
-        existingEvent={editingEvent}
-        onSuccess={() => {
-          setEditingEvent(null)
-          loadEvents()
-        }}
-      />
+    <div className="dashboard">
+      <h1>Événements existants</h1>
 
-      <h2 className="text-xl font-bold">Événements existants</h2>
-
-      <div className="grid gap-4">
+      <div className="events-list">
         {events.map(event => (
+          // On utilise EventCard ici pour chaque événement
           <EventCard
             key={event.id}
             event={event}
-            onEdit={setEditingEvent}
-            onDelete={handleDelete}
+            onDelete={handleDelete} // bouton supprimer
           />
         ))}
       </div>
     </div>
   )
 }
-
-export default Dashboard

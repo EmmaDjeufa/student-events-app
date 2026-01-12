@@ -1,0 +1,46 @@
+.registrations-page {
+  padding: 2rem;
+}
+
+.registrations-page h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: #3b82f6;
+  text-align: center;
+}
+
+.notice {
+  text-align: center;
+  color: #fbbf24;
+  margin-bottom: 1rem;
+}
+
+.registrations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.registration-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.registration-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+}
+
+.registration-card p {
+  margin-bottom: 0.5rem;
+  color: #374151;
+}
+
+.registration-date {
+  font-size: 0.9rem;
+  color: #9ca3af;
+}

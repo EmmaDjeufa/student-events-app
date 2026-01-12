@@ -1,7 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import '../pages/css/Navbar.css'
 import '../index.css'
-
 export default function Navbar() {
   const token = localStorage.getItem('token')
   const navigate = useNavigate()
@@ -11,60 +10,42 @@ export default function Navbar() {
     navigate('/')
   }
 
+  const handleAddEventClick = () => {
+    if (token) {
+      navigate('/add-event')
+    } else {
+      alert('Vous devez vous inscrire ou vous connecter pour ajouter un événement.')
+      navigate('/register')
+    }
+  }
+
   return (
-    <nav className="bg-blue-600 text-white px-6 py-4 flex justify-between items-center shadow-md sticky top-0 z-50">
-      {/* Logo */}
-      <div className="font-bold text-xl hover:text-yellow-300 transition-colors">
+    <nav className="navbar">
+      <div className="logo">
         <Link to="/">Student Events</Link>
       </div>
 
-      {/* Menu */}
-      <div className="flex space-x-4 items-center">
-        <Link
-          to="/events"
-          className="hover:text-yellow-300 transition-colors px-3 py-1 rounded-md"
-        >
-          Événements
-        </Link>
+      <div className="nav-links">
+        <Link to="/events">Événements</Link>
+        <Link to="/registrations">Inscrits</Link>
 
-        {!token && (
+        {!token ? (
           <>
-            <Link
-              to="/login"
-              className="hover:text-yellow-300 transition-colors px-3 py-1 rounded-md"
-            >
-              Connexion
-            </Link>
-            <Link
-              to="/register"
-              className="hover:text-yellow-300 transition-colors px-3 py-1 rounded-md"
-            >
-              S'inscrire
-            </Link>
+            <Link to="/login">Connexion</Link>
+            <Link to="/register">S'inscrire</Link>
           </>
+        ) : (
+          <Link to="/dashboard">Dashboard</Link>
         )}
 
+        <button onClick={handleAddEventClick}>
+          Ajouter un événement
+        </button>
+
         {token && (
-          <>
-            <Link
-              to="/dashboard"
-              className="hover:text-yellow-300 transition-colors px-3 py-1 rounded-md"
-            >
-              Dashboard
-            </Link>
-            <Link
-              to="/events/add"
-              className="hover:text-yellow-300 transition-colors px-3 py-1 rounded-md"
-            >
-              Ajouter un événement
-            </Link>
-            <button
-              onClick={handleLogout}
-              className="hover:text-yellow-300 transition-colors px-3 py-1 rounded-md"
-            >
-              Déconnexion
-            </button>
-          </>
+          <button onClick={handleLogout} className="logout">
+            Déconnexion
+          </button>
         )}
       </div>
     </nav>

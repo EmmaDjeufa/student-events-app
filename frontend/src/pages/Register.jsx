@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { apiRequest } from '../api/api'
 import { useNavigate } from 'react-router-dom'
-import '../index.css'
+import '../pages/css/Auth.css'
 
 export default function Register() {
   const [name, setName] = useState('')
@@ -28,27 +28,25 @@ export default function Register() {
 
       // Enregistrement
       await apiRequest('/auth/register', 'POST', { name, email, password })
-      // Redirection vers login
       navigate('/login')
     } catch (err) {
-      setError(err.message)
+      setError(err.message || 'Une erreur est survenue')
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-400 via-pink-500 to-red-400 p-4">
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-lg w-full max-w-md animate-fadeIn">
-        <h1 className="text-2xl font-bold mb-4 text-center">Inscription</h1>
-        {error && <p className="text-red-500 mb-2">{error}</p>}
+    <div className="auth-page">
+      <form onSubmit={handleSubmit} className="auth-form animate-fadeIn">
+        <h1>Inscription</h1>
+        {error && <p className="auth-error">{error}</p>}
 
         <input
           type="text"
           placeholder="Nom"
           value={name}
           onChange={e => setName(e.target.value)}
-          className="w-full p-2 mb-3 border rounded"
           required
         />
         <input
@@ -56,7 +54,6 @@ export default function Register() {
           placeholder="Email"
           value={email}
           onChange={e => setEmail(e.target.value)}
-          className="w-full p-2 mb-3 border rounded"
           required
         />
         <input
@@ -64,16 +61,11 @@ export default function Register() {
           placeholder="Mot de passe"
           value={password}
           onChange={e => setPassword(e.target.value)}
-          className="w-full p-2 mb-4 border rounded"
           required
         />
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded transition-colors"
-        >
-          {loading ? 'Chargement...' : "S'inscrire"}
+        <button type="submit" disabled={loading}>
+          {loading ? 'Chargement...' : 'S\'inscrire'}
         </button>
       </form>
     </div>

@@ -1,3 +1,4 @@
+/* Navbar.css */
 .navbar {
   position: sticky;
   top: 0;
@@ -9,7 +10,6 @@
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  transition: all 0.3s ease;
 }
 
 .navbar:hover {
@@ -26,39 +26,32 @@
 .nav-links {
   display: flex;
   gap: 1rem;
+  align-items: center;
 }
 
-.nav-btn {
+.nav-links a,
+.nav-links button {
   padding: 0.5rem 1.25rem;
   border-radius: 9999px;
   font-weight: bold;
-  background-color: rgba(255,255,255,0.2);
+  background-color: rgba(255, 255, 255, 0.2);
   color: white;
+  cursor: pointer;
+  text-decoration: none;
   transition: all 0.3s ease;
 }
 
-.nav-btn:hover {
-  background-color: rgba(255,255,255,0.4);
+.nav-links a:hover,
+.nav-links button:hover {
+  background-color: rgba(255, 255, 255, 0.4);
   transform: translateY(-2px) scale(1.05);
   box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
-.nav-btn.secondary {
-  background-color: #fbbf24;
-  color: white;
-}
-
-.nav-btn.secondary:hover {
-  background-color: #f59e0b;
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-}
-
-.nav-btn.logout {
+.nav-links button.logout {
   background-color: #ef4444;
 }
 
-.nav-btn.logout:hover {
+.nav-links button.logout:hover {
   background-color: #dc2626;
-  transform: translateY(-2px) scale(1.05);
 }

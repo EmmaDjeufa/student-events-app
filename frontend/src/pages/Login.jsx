@@ -15,12 +15,14 @@ function Login() {
 
     try {
       const data = await apiRequest('/auth/login', 'POST', { email, password })
-        if (data.token) {
-          localStorage.setItem('token', data.token)
-          navigate('/events/add')  // redirige vers ajout d'évènement
-        }
+      
+      if (data.token) {
+        localStorage.setItem('token', data.token)
+        // Redirection vers la liste des événements, pas le formulaire d'ajout
+        navigate('/events')
+      }
 
-            } catch (err) {
+    } catch (err) {
       setError('Une erreur est survenue. Réessayez.')
     }
   }
@@ -29,9 +31,24 @@ function Login() {
     <form onSubmit={handleSubmit} className="form-container">
       <h1 className="title">Connexion</h1>
       {error && <p className="text-red">{error}</p>}
-      <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
-      <input type="password" placeholder="Mot de passe" value={password} onChange={e => setPassword(e.target.value)} />
-      <button type="submit" className="btn btn-primary">Connexion</button>
+
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+        className="border p-2 w-full mb-4"
+      />
+
+      <input
+        type="password"
+        placeholder="Mot de passe"
+        value={password}
+        onChange={e => setPassword(e.target.value)}
+        className="border p-2 w-full mb-4"
+      />
+
+      <button type="submit" className="btn btn-primary w-full">Connexion</button>
     </form>
   )
 }
