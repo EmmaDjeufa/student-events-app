@@ -1,4 +1,3 @@
-//Registrations.jsx
 import { useEffect, useState } from 'react'
 import './css/Registrations.css'
 
@@ -40,6 +39,7 @@ function Registrations() {
             <div key={reg.id} className="registration-card">
               <p><strong>Nom :</strong> {reg.user_name}</p>
               <p><strong>Email :</strong> {reg.user_email}</p>
+              <p><strong>Rôle :</strong> {reg.user_role}</p>
               <p><strong>Événement :</strong> {reg.event_title}</p>
               <p className="registration-date">
                 Inscrit le : {new Date(reg.created_at).toLocaleDateString()}
@@ -53,5 +53,4 @@ function Registrations() {
 }
 
 export default Registrations
-
 

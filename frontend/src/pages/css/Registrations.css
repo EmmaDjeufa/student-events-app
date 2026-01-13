@@ -44,3 +44,34 @@
   font-size: 0.9rem;
   color: #9ca3af;
 }
+.registrations-page {
+  padding: 2rem;
+}
+
+.registrations-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.registration-card {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.registration-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.registration-date {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.notice {
+  color: #b45309;
+  margin-bottom: 1rem;
+}
