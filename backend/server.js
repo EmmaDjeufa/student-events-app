@@ -1,22 +1,20 @@
 const express = require('express')
 const cors = require('cors')
-
-const app = express()
 const path = require('path')
 
+const app = express()
 app.use(express.json())
 
-// CORS SIMPLE POUR DEV
+// CORS simple pour dev
 app.use(cors())
 
 // Routes
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/events', require('./routes/events'))
 app.use('/api/registrations', require('./routes/registrations'))
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 app.use('/api/profile', require('./routes/profile'))
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
-
-app.listen(5000, () => {
-  console.log('🚀 Backend running on port 5000')
-})
+// Render fournit le port via env
+const PORT = process.env.PORT || 5000
+app.listen(PORT, () => console.log(`🚀 Backend running on port ${PORT}`))
