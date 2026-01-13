@@ -2,28 +2,28 @@ import { useEffect, useState } from 'react'
 import './css/Registrations.css'
 
 function Registrations() {
-  const [registrations, setRegistrations] = useState([])
+  const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(true)
   const token = localStorage.getItem('token')
 
   useEffect(() => {
-    async function loadRegistrations() {
+    async function loadUsers() {
       try {
-        const res = await fetch('/api/registrations/public') // proxy Vite
+        const res = await fetch('/api/registrations/public')
         const data = await res.json()
-        setRegistrations(data)
+        setUsers(data)
       } catch (err) {
-        console.error('Erreur récupération des inscrits:', err)
+        console.error('Erreur récupération des utilisateurs:', err)
       } finally {
         setLoading(false)
       }
     }
-    loadRegistrations()
+    loadUsers()
   }, [])
 
   return (
     <div className="registrations-page">
-      <h1>Liste des inscrits</h1>
+      <h1>Liste des utilisateurs</h1>
 
       {!token && (
         <p className="notice">
@@ -32,17 +32,22 @@ function Registrations() {
       )}
 
       {loading ? (
-        <p>Chargement des inscrits...</p>
+        <p>Chargement des utilisateurs...</p>
       ) : (
         <div className="registrations-grid">
-          {registrations.map(reg => (
-            <div key={reg.id} className="registration-card">
-              <p><strong>Nom :</strong> {reg.user_name}</p>
-              <p><strong>Email :</strong> {reg.user_email}</p>
-              <p><strong>Rôle :</strong> {reg.user_role}</p>
-              <p><strong>Événement :</strong> {reg.event_title}</p>
-              <p className="registration-date">
-                Inscrit le : {new Date(reg.created_at).toLocaleDateString()}
+          {users.map(user => (
+            <div key={user.id} className="registration-card">
+              <p>
+                <strong>Nom :</strong> {user.user_name}{' '}
+                {user.user_role === 'admin' && (
+                  <span className="admin-badge">ADMIN</span>
+                )}
+              </p>
+              <p><strong>Email :</strong> {user.user_email}</p>
+              <p><strong>Rôle :</strong> {user.user_role}</p>
+              <p>
+                <strong>Événements :</strong>{' '}
+                {user.events.length > 0 ? user.events.join(', ') : 'Aucun'}
               </p>
             </div>
           ))}
