@@ -5,29 +5,50 @@ import './css/Events.css'
 
 function Events() {
   const [events, setEvents] = useState([])
+  const [loading, setLoading] = useState(true) // état pour le chargement
+  const [error, setError] = useState(null) // pour gérer les erreurs
   const navigate = useNavigate()
 
   useEffect(() => {
-    apiRequest('/events').then(setEvents)
+    setLoading(true)
+    setError(null)
+
+    apiRequest('/events')
+      .then(data => {
+        setEvents(data)
+        setLoading(false)
+      })
+      .catch(err => {
+        console.error(err)
+        setError("Impossible de charger les événements.")
+        setLoading(false)
+      })
   }, [])
 
   return (
     <div className="events-container">
       <h1 className="events-title">Événements</h1>
 
-      <div className="events-grid">
-        {events.map(event => (
-          <div key={event.id} className="event-card">
-            <h2>{event.title}</h2>
-            <p>{event.description}</p>
-            <p className="event-date">{event.date}</p>
-            <button className="btn-secondary" onClick={() => navigate(`/events/${event.id}`)}>Voir Détails</button>
-          </div>
-        ))}
-      </div>
+      {loading && <p className="loading-text">Chargement des événements...</p>}
+      {error && <p className="error-text">{error}</p>}
+
+      {!loading && !error && (
+        <div className="events-grid">
+          {events.length === 0 && <p>Aucun événement disponible.</p>}
+          {events.map(event => (
+            <div key={event.id} className="event-card">
+              <h2>{event.title}</h2>
+              <p>{event.description}</p>
+              <p className="event-date">{event.date}</p>
+              <button className="btn-secondary" onClick={() => navigate(`/events/${event.id}`)}>
+                Voir Détails
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
 
 export default Events
-

@@ -1,7 +1,9 @@
 # student-events-app
 
 (sudo -i ,
-sudo -u postgres psql)
+- sudo -u postgres psql (\c student_events_db)
+- sudo service postgresql status
+- sudo service postgresql start)
 
 (sudo service postgresql start
 )

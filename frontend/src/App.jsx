@@ -10,6 +10,9 @@ import Registrations from './pages/Registrations'
 import './App.css'
 import AddEvent from './pages/AddEvent'
 import EditEvent from './pages/EditEvent'
+import Profile from './pages/Profile'
+import AdminLogin from './pages/AdminLogin'
+
 
 
 /* Route protégée : accessible uniquement si token existant */
@@ -48,8 +51,15 @@ function App() {
             path="/events/add"
             element={<ProtectedRoute><div>Formulaire Ajouter Événement</div></ProtectedRoute>}
           />
+          <Route
+            path="/profile"
+            element={
+              localStorage.getItem('token') ? <Profile /> : <Navigate to="/login" />
+            }
+          />
           <Route path="/add-event" element={<AddEvent />} />
           <Route path="/events/edit/:id" element={<ProtectedRoute><EditEvent /></ProtectedRoute>} />
+          <Route path="/admin-login" element={<AdminLogin />} />
         </Routes>
       </div>
     </>
