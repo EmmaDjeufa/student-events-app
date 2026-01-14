@@ -1,9 +1,9 @@
-const BASE_URL = import.meta.env.VITE_BACKEND_URL
+const BASE_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
 
 export async function apiRequest(path, method = 'GET', body) {
   const token = localStorage.getItem('token')
 
-  const res = await fetch(`${BASE_URL}/api${path}`, {
+  const res = await fetch(`${BASE_URL}${path}`, {
     method,
     headers: {
       'Content-Type': 'application/json',
@@ -13,9 +13,7 @@ export async function apiRequest(path, method = 'GET', body) {
   })
 
   if (!res.ok) {
-    const text = await res.text()
-    throw new Error(text || 'Erreur API')
+    throw new Error(await res.text())
   }
-
   return res.json()
 }
