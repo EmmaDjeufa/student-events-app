@@ -13,7 +13,8 @@ export async function apiRequest(path, method = 'GET', body) {
   })
 
   if (!res.ok) {
-    throw new Error(await res.text())
+    const text = await res.text()
+    throw new Error(text || 'Erreur API')
   }
 
   return res.json()

@@ -9,8 +9,7 @@ function Registrations() {
   useEffect(() => {
     async function loadUsers() {
       try {
-        const res = await fetch('/api/registrations/public')
-        const data = await res.json()
+        const data = await apiRequest('/registrations/public')
         setUsers(data)
       } catch (err) {
         console.error('Erreur récupération des utilisateurs:', err)

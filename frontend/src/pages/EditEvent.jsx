@@ -30,6 +30,16 @@ export default function EditEvent() {
     }
     loadEvent()
   }, [id])
+    async function handleDelete(id) {
+      if (!confirm('Supprimer cet événement ?')) return
+      try {
+        await apiRequest(`/events/${id}`, 'DELETE')
+        loadEvents()
+      } catch (err) {
+        alert('Erreur lors de la suppression : ' + err.message)
+      }
+   }
+
 
   const handleSubmit = async (e) => {
     e.preventDefault()

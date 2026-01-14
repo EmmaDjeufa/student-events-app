@@ -21,13 +21,14 @@ export default function Profile() {
     const formData = new FormData()
     formData.append('avatar', file)
 
-    const res = await fetch('/api/profile/avatar', {
+    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/profile/avatar`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
       body: formData,
     })
+
 
     const data = await res.json()
     setUser({ ...user, avatar: data.avatar })
