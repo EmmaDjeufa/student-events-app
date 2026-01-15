@@ -50,60 +50,26 @@ export default function Navbar() {
     <>
       {isMenuOpen && <div className="nav-overlay" onClick={closeMenu} />}
 
-      <nav className="navbar">
-        <Link to="/">Student Events</Link>
+        <nav className="navbar">
+          <Link to="/">Student Events</Link>
 
-        {/* Burger */}
-        <div
-          className={`burger ${isMenuOpen ? 'open' : ''}`}
-          ref={burgerRef}
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          <div className="line"></div>
-          <div className="line"></div>
-          <div className="line"></div>
-        </div>
+          <div
+            className={`burger ${isMenuOpen ? 'open' : ''}`}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            <div className="line"></div>
+            <div className="line"></div>
+            <div className="line"></div>
+          </div>
 
-        {/* Menu */}
-        <div ref={menuRef} className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
-          <Link to="/events" onClick={closeMenu}>Événements</Link>
-          <Link to="/registrations" onClick={closeMenu}>Inscrits</Link>
+          <div className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
+            <Link to="/events" onClick={closeMenu}>Événements</Link>
+            <Link to="/registrations" onClick={closeMenu}>Inscrits</Link>
+            <Link to="/profile" onClick={closeMenu}>Profil</Link>
+            <Link to="/dashboard" onClick={closeMenu}>Dashboard</Link>
+          </div>
+        </nav>
 
-          {!token && (
-            <>
-              <Link to="/login" onClick={closeMenu}>Connexion</Link>
-              {userExists && (
-                <Link to="/register" onClick={closeMenu}>
-                  S'inscrire
-                </Link>
-              )}
-              <Link to="/admin-login" className="nav-btn secondary" onClick={closeMenu}>
-                Admin
-              </Link>
-            </>
-          )}
-
-          {token && (
-            <>
-              <Link to="/profile" onClick={closeMenu}>Profil</Link>
-              <Link to="/dashboard" onClick={closeMenu}>Dashboard</Link>
-              {role === 'admin' && (
-                <span className="text-yellow-500 font-bold">ADMIN</span>
-              )}
-            </>
-          )}
-
-          <button className="nav-btn" onClick={handleAddEventClick}>
-            Ajouter un événement
-          </button>
-
-          {token && (
-            <button className="nav-btn logout" onClick={handleLogout}>
-              Déconnexion
-            </button>
-          )}
-        </div>
-      </nav>
     </>
   )
 }
