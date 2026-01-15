@@ -1,7 +1,7 @@
 const pool = require('../config/db')
 const bcrypt = require('bcrypt')
+const path = require('path')
 
-// GET profile
 exports.getProfile = async (req, res) => {
   try {
     const userRes = await pool.query(
@@ -15,7 +15,6 @@ exports.getProfile = async (req, res) => {
   }
 }
 
-// UPDATE password
 exports.updatePassword = async (req, res) => {
   try {
     const { oldPassword, newPassword } = req.body
@@ -35,15 +34,14 @@ exports.updatePassword = async (req, res) => {
   }
 }
 
-// UPLOAD avatar
 exports.uploadAvatar = async (req, res) => {
   try {
     if (!req.file) return res.status(400).json({ message: 'Fichier manquant' })
 
-    const avatarUrl = `/uploads/avatars/${req.file.filename}`
-    await pool.query('UPDATE users SET avatar=$1 WHERE id=$2', [avatarUrl, req.user.id])
+    const avatarPath = `/uploads/avatars/${req.file.filename}`
+    await pool.query('UPDATE users SET avatar=$1 WHERE id=$2', [avatarPath, req.user.id])
 
-    res.json({ avatar: avatarUrl })
+    res.json({ avatar: avatarPath })
   } catch (err) {
     console.error('UPLOAD AVATAR ERROR:', err)
     res.status(500).json({ message: 'Erreur serveur' })

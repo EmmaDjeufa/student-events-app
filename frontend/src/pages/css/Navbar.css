@@ -10,25 +10,29 @@
 }
 
 .logo {
-  cursor: pointer;
+  color: white;
+  text-decoration: none;
   font-weight: bold;
 }
 
-/* Desktop */
+/* Liens */
 .nav-links {
   display: flex;
   gap: 1rem;
   align-items: center;
 }
 
+.nav-links a,
 .nav-links button {
+  color: white;
+  text-decoration: none;
   background: none;
   border: none;
-  color: white;
   cursor: pointer;
   text-align: left;
 }
 
+/* Buttons */
 .nav-btn {
   padding: 0.4rem 0.8rem;
   background-color: #3b82f6;

@@ -7,9 +7,8 @@ export default function Profile() {
   const [oldPassword, setOldPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [success, setSuccess] = useState('')
-  const [showPasswordForm, setShowPasswordForm] = useState(false) // pour afficher le formulaire sur demande
+  const [showPasswordForm, setShowPasswordForm] = useState(false)
 
-  // Charger le profil
   useEffect(() => {
     async function loadProfile() {
       try {
@@ -22,7 +21,6 @@ export default function Profile() {
     loadProfile()
   }, [])
 
-  // Upload avatar
   async function handleUpload(e) {
     const file = e.target.files[0]
     if (!file) return
@@ -39,13 +37,12 @@ export default function Profile() {
         body: formData,
       })
       const data = await res.json()
-      setUser({ ...user, avatar: data.avatar })
+      setUser({ ...user, avatar: `${import.meta.env.VITE_BACKEND_URL}${data.avatar}` })
     } catch (err) {
       console.error('Erreur upload avatar:', err)
     }
   }
 
-  // Changement mot de passe
   async function handleChangePassword(e) {
     e.preventDefault()
     try {
@@ -66,7 +63,7 @@ export default function Profile() {
       <h1>Mon profil</h1>
 
       <img
-        src={user.avatar ? `${import.meta.env.VITE_BACKEND_URL}${user.avatar}` : '/default-avatar.png'}
+        src={user.avatar || '/default-avatar.png'}
         className="profile-avatar"
         alt="Avatar"
       />
@@ -83,9 +80,8 @@ export default function Profile() {
         <p><strong>Inscrit le :</strong> {new Date(user.created_at).toLocaleDateString()}</p>
       </div>
 
-      {/* Bouton pour afficher le formulaire de mot de passe */}
-      <button className="btn-change-password" onClick={() => setShowPasswordForm(!showPasswordForm)}>
-        {showPasswordForm ? 'Annuler' : 'Changer le mot de passe'}
+      <button className="toggle-password-btn" onClick={() => setShowPasswordForm(!showPasswordForm)}>
+        {showPasswordForm ? 'Annuler changement mot de passe' : 'Changer le mot de passe'}
       </button>
 
       {showPasswordForm && (
