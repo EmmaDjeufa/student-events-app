@@ -7,7 +7,9 @@ export default function Profile() {
   const [oldPassword, setOldPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [success, setSuccess] = useState('')
+  const [showPasswordForm, setShowPasswordForm] = useState(false) // pour afficher le formulaire sur demande
 
+  // Charger le profil
   useEffect(() => {
     async function loadProfile() {
       try {
@@ -20,6 +22,7 @@ export default function Profile() {
     loadProfile()
   }, [])
 
+  // Upload avatar
   async function handleUpload(e) {
     const file = e.target.files[0]
     if (!file) return
@@ -42,6 +45,7 @@ export default function Profile() {
     }
   }
 
+  // Changement mot de passe
   async function handleChangePassword(e) {
     e.preventDefault()
     try {
@@ -49,6 +53,7 @@ export default function Profile() {
       setSuccess('Mot de passe mis à jour ✅')
       setOldPassword('')
       setNewPassword('')
+      setShowPasswordForm(false)
     } catch (err) {
       alert(err.message || 'Erreur lors de la modification du mot de passe')
     }
@@ -61,7 +66,7 @@ export default function Profile() {
       <h1>Mon profil</h1>
 
       <img
-        src={user.avatar || '/default-avatar.png'}
+        src={user.avatar ? `${import.meta.env.VITE_BACKEND_URL}${user.avatar}` : '/default-avatar.png'}
         className="profile-avatar"
         alt="Avatar"
       />
@@ -78,24 +83,30 @@ export default function Profile() {
         <p><strong>Inscrit le :</strong> {new Date(user.created_at).toLocaleDateString()}</p>
       </div>
 
-      <h2>Modifier le mot de passe</h2>
-      <form onSubmit={handleChangePassword} className="password-form">
-        <input
-          type="password"
-          placeholder="Mot de passe actuel"
-          value={oldPassword}
-          onChange={e => setOldPassword(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Nouveau mot de passe"
-          value={newPassword}
-          onChange={e => setNewPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Modifier le mot de passe</button>
-      </form>
+      {/* Bouton pour afficher le formulaire de mot de passe */}
+      <button className="btn-change-password" onClick={() => setShowPasswordForm(!showPasswordForm)}>
+        {showPasswordForm ? 'Annuler' : 'Changer le mot de passe'}
+      </button>
+
+      {showPasswordForm && (
+        <form onSubmit={handleChangePassword} className="password-form">
+          <input
+            type="password"
+            placeholder="Mot de passe actuel"
+            value={oldPassword}
+            onChange={e => setOldPassword(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Nouveau mot de passe"
+            value={newPassword}
+            onChange={e => setNewPassword(e.target.value)}
+            required
+          />
+          <button type="submit">Modifier le mot de passe</button>
+        </form>
+      )}
 
       {success && <p className="success-msg">{success}</p>}
     </div>

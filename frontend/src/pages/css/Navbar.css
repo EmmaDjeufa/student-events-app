@@ -9,6 +9,12 @@
   z-index: 1002;
 }
 
+.logo {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Desktop */
 .nav-links {
   display: flex;
   gap: 1rem;
@@ -51,7 +57,7 @@
   background-color: white;
 }
 
-/* Overlay derrière le menu */
+/* Overlay */
 .nav-overlay {
   position: fixed;
   inset: 0;

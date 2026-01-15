@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const auth = require('../middleware/auth')
-const upload = require('../config/upload')   // multer pour les fichiers
+const upload = require('../config/upload')
 const { getProfile, updatePassword, uploadAvatar } = require('../controllers/profileController')
 
 // Récupérer son profil

@@ -5,12 +5,12 @@ const bcrypt = require('bcrypt')
 exports.getProfile = async (req, res) => {
   try {
     const userRes = await pool.query(
-      'SELECT id, name, email, role, created_at FROM users WHERE id=$1',
+      'SELECT id, name, email, role, avatar, created_at FROM users WHERE id=$1',
       [req.user.id]
     )
     res.json(userRes.rows[0])
   } catch (err) {
-    console.error(err)
+    console.error('GET PROFILE ERROR:', err)
     res.status(500).json({ message: 'Erreur serveur' })
   }
 }
@@ -19,7 +19,6 @@ exports.getProfile = async (req, res) => {
 exports.updatePassword = async (req, res) => {
   try {
     const { oldPassword, newPassword } = req.body
-
     const userRes = await pool.query('SELECT password FROM users WHERE id=$1', [req.user.id])
     const user = userRes.rows[0]
 
@@ -31,11 +30,10 @@ exports.updatePassword = async (req, res) => {
 
     res.json({ message: 'Mot de passe mis à jour' })
   } catch (err) {
-    console.error(err)
+    console.error('UPDATE PASSWORD ERROR:', err)
     res.status(500).json({ message: 'Erreur serveur' })
   }
 }
-
 
 // UPLOAD avatar
 exports.uploadAvatar = async (req, res) => {
@@ -47,7 +45,7 @@ exports.uploadAvatar = async (req, res) => {
 
     res.json({ avatar: avatarUrl })
   } catch (err) {
-    console.error(err)
+    console.error('UPLOAD AVATAR ERROR:', err)
     res.status(500).json({ message: 'Erreur serveur' })
   }
 }

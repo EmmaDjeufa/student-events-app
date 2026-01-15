@@ -1,6 +1,6 @@
 // src/components/Navbar.jsx
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { apiRequest } from '../api/api'
 import '../pages/css/Navbar.css'
 
@@ -8,6 +8,7 @@ export default function Navbar() {
   const token = localStorage.getItem('token')
   const role = localStorage.getItem('role')
   const navigate = useNavigate()
+  const location = useLocation()
 
   const [userExists, setUserExists] = useState(true)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -25,9 +26,17 @@ export default function Navbar() {
     checkUser()
   }, [token])
 
+  /** Navigation robuste mobile */
   const goTo = (path) => {
     setIsMenuOpen(false)
-    navigate(path)
+
+    if (location.pathname !== path) {
+      navigate(path)
+    } else {
+      // force un vrai changement perçu par React Router
+      navigate('/__redirect', { replace: true })
+      requestAnimationFrame(() => navigate(path))
+    }
   }
 
   const handleLogout = () => {
@@ -64,9 +73,14 @@ export default function Navbar() {
             <>
               <button onClick={() => goTo('/login')}>Connexion</button>
               {userExists && (
-                <button onClick={() => goTo('/register')}>S'inscrire</button>
+                <button onClick={() => goTo('/register')}>
+                  S'inscrire
+                </button>
               )}
-              <button className="nav-btn secondary" onClick={() => goTo('/admin-login')}>
+              <button
+                className="nav-btn secondary"
+                onClick={() => goTo('/admin-login')}
+              >
                 Admin
               </button>
             </>
@@ -76,7 +90,9 @@ export default function Navbar() {
             <>
               <button onClick={() => goTo('/profile')}>Profil</button>
               <button onClick={() => goTo('/dashboard')}>Dashboard</button>
-              {role === 'admin' && <span className="admin-badge">ADMIN</span>}
+              {role === 'admin' && (
+                <span className="admin-badge">ADMIN</span>
+              )}
             </>
           )}
 
