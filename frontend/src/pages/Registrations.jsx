@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { apiRequest } from '../api/api'
 import './css/Registrations.css'
 
 function Registrations() {
@@ -42,11 +43,15 @@ function Registrations() {
                   <span className="admin-badge">ADMIN</span>
                 )}
               </p>
+
               <p><strong>Email :</strong> {user.user_email}</p>
               <p><strong>Rôle :</strong> {user.user_role}</p>
+
               <p>
                 <strong>Événements :</strong>{' '}
-                {user.events.length > 0 ? user.events.join(', ') : 'Aucun'}
+                {user.events && user.events.length > 0
+                  ? user.events.join(', ')
+                  : 'Aucun'}
               </p>
             </div>
           ))}

@@ -1,26 +1,43 @@
-// routes/registrations.js
 const express = require('express')
 const pool = require('../config/db')
 const router = express.Router()
 
-// Route publique : liste tous les utilisateurs avec leurs rôles et éventuellement les événements
+// Liste publique de TOUS les utilisateurs + leurs événements
 router.get('/public', async (req, res, next) => {
   try {
     const result = await pool.query(`
       SELECT 
-        u.id,
+        u.id AS user_id,
         u.name AS user_name,
         u.email AS user_email,
         u.role AS user_role,
-        ARRAY_REMOVE(ARRAY_AGG(e.title), NULL) AS events
+        e.title AS event_title
       FROM users u
-      LEFT JOIN registrations r ON u.id = r.user_id
-      LEFT JOIN events e ON r.event_id = e.id
-      GROUP BY u.id, u.name, u.email, u.role
-      ORDER BY u.id
+      LEFT JOIN registrations r ON r.user_id = u.id
+      LEFT JOIN events e ON e.id = r.event_id
+      ORDER BY u.created_at DESC
     `)
 
-    res.json(result.rows)
+    // Regroupement par utilisateur
+    const usersMap = {}
+
+    for (const row of result.rows) {
+      if (!usersMap[row.user_id]) {
+        usersMap[row.user_id] = {
+          id: row.user_id,
+          user_name: row.user_name,
+          user_email: row.user_email,
+          user_role: row.user_role,
+          events: []
+        }
+      }
+
+      if (row.event_title) {
+        usersMap[row.user_id].events.push(row.event_title)
+      }
+    }
+
+    res.json(Object.values(usersMap))
   } catch (err) {
     next(err)
   }
