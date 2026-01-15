@@ -2,6 +2,7 @@ const express = require('express')
 const pool = require('../config/db')
 const router = express.Router()
 
+
 // Liste publique de TOUS les utilisateurs + leurs événements
 router.get('/public', async (req, res, next) => {
   try {

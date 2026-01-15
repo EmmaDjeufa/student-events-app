@@ -1,18 +1,24 @@
-/* src/pages/css/Navbar.css */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.8rem 2rem;
-  background-color: #1f2937; /* gris foncé */
+  background-color: #1f2937;
   color: white;
   position: relative;
+  z-index: 1002;
 }
 
+/* Liens desktop */
 .nav-links {
   display: flex;
   gap: 1rem;
   align-items: center;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
 }
 
 .nav-btn {
@@ -32,21 +38,44 @@
   background-color: #10b981;
 }
 
-/* Burger menu */
+/* Burger */
 .burger {
   display: none;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
   cursor: pointer;
+  z-index: 1003;
 }
 
 .burger .line {
-  width: 25px;
+  width: 26px;
   height: 3px;
   background-color: white;
+  transition: all 0.3s ease;
 }
 
-/* Responsive */
+/* Burger animation */
+.burger.open .line:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.burger.open .line:nth-child(2) {
+  opacity: 0;
+}
+
+.burger.open .line:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Overlay */
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1000;
+}
+
+/* Mobile & tablette */
 @media (max-width: 768px) {
   .burger {
     display: flex;
@@ -56,16 +85,26 @@
     position: absolute;
     top: 100%;
     right: 0;
+    width: 100%;
     background-color: #1f2937;
     flex-direction: column;
-    width: 200px;
     padding: 1rem;
-    gap: 0.5rem;
-    display: none;
-    border-radius: 0 0 8px 8px;
+    gap: 0.8rem;
+
+    /* Animation */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
   }
 
   .nav-links.open {
-    display: flex;
+    max-height: 500px;
+  }
+
+  .nav-links a,
+  .nav-links button,
+  .nav-links span {
+    width: 100%;
+    text-align: left;
   }
 }

@@ -4,12 +4,16 @@ import '../pages/css/Profile.css'
 
 export default function Profile() {
   const [user, setUser] = useState(null)
-  const [avatar, setAvatar] = useState(null)
 
   useEffect(() => {
     async function loadProfile() {
-      const data = await apiRequest('/profile')
-      setUser(data)
+      try {
+        const token = localStorage.getItem('token')
+        const data = await apiRequest('/profile', 'GET', null, token) // token ajouté
+        setUser(data)
+      } catch (err) {
+        console.error('Erreur chargement profil:', err)
+      }
     }
     loadProfile()
   }, [])
@@ -28,7 +32,6 @@ export default function Profile() {
       },
       body: formData,
     })
-
 
     const data = await res.json()
     setUser({ ...user, avatar: data.avatar })
