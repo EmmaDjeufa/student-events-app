@@ -7,53 +7,99 @@
 
 (sudo service postgresql start
 )
+
+
 student-events-app/
-│
 ├─ backend/
-│   ├─ package.json
-│   ├─ server.js
-│   ├─ .env
-│   ├─ config/
-│   │   └─ db.js
-│   ├─ middleware/
-│   │   ├─ auth.js
-│   │   └─ errorHandler.js
-│   ├─ models/
-│   │   ├─ User.js
-│   │   ├─ Event.js
-│   │   └─ Registration.js
-│   ├─ routes/
-│   │   ├─ auth.js
-│   │   ├─ events.js
-│   │   └─ registrations.js
-│   ├─ utils/
-│   │   └─ mailer.js
-│   └─ tests/
-│       └─ backend.test.js
+│  ├─ package.json
+│  ├─ package-lock.json
+│  ├─ server.js
+│  ├─ .env
+│  ├─ config/
+│  │  ├─ db.js
+│  │  └─ upload.js
+│  ├─ middleware/
+│  │  ├─ auth.js
+│  │  ├─ admin.js
+│  │  └─ errorHandler.js
+│  ├─ controllers/
+│  │  ├─ authController.js
+│  │  ├─ eventController.js
+│  │  └─ registrationController.js
+│  ├─ models/
+│  │  ├─ User.js
+│  │  ├─ Event.js
+│  │  └─ Registration.js
+│  ├─ routes/
+│  │  ├─ auth.js
+│  │  ├─ events.js
+│  │  ├─ profile.js
+│  │  ├─ users.js
+│  │  └─ registrations.js
+│  ├─ utils/
+│  │  └─ mailer.js
+│  ├─ uploads/
+│  │  └─ avatars/
+│  └─ tests/
+│     └─ backend.test.js
 │
 ├─ frontend/
-│   ├─ package.json
-│   ├─ tailwind.config.js
-│   ├─ postcss.config.js
-│   ├─ vite.config.js
-│   ├─ src/
-│   │   ├─ main.jsx
-│   │   ├─ App.jsx
-│   │   ├─ api/
-│   │   │   └─ api.js
-│   │   ├─ pages/
-│   │   │   ├─ Login.jsx
-│   │   │   ├─ Register.jsx
-│   │   │   ├─ Events.jsx
-│   │   │   ├─ EventDetail.jsx
-│   │   │   └─ Dashboard.jsx
-│   │   └─ components/
-│   │       ├─ Navbar.jsx
-│   │       └─ EventCard.jsx
+│  ├─ package.json
+│  ├─ package-lock.json
+│  ├─ tailwind.config.cjs
+│  ├─ postcss.config.cjs
+│  ├─ vite.config.js
+│  ├─ .env
+│  ├─ .gitignore
+│  ├─ eslint.config.js
+│  ├─ index.html
+│  ├─ dist/
+│  ├─ public/
+│  ├─ node_modules/
+│  └─ src/
+│     ├─ main.jsx
+│     ├─ index.css
+│     ├─ App.jsx
+│     ├─ App.css
+│     ├─ api/
+│     │  └─ api.js
+│     ├─ pages/
+│     │  ├─ Home.jsx
+│     │  ├─ Login.jsx
+│     │  ├─ Register.jsx
+│     │  ├─ Events.jsx
+│     │  ├─ EventDetail.jsx
+│     │  ├─ Dashboard.jsx
+│     │  ├─ Registrations.jsx
+│     │  ├─ AddEvent.jsx
+│     │  ├─ EditEvent.jsx
+│     │  ├─ Profile.jsx
+│     │  └─ AdminLogin.jsx
+│     ├─ pages/css/
+│     │  ├─ Home.css
+│     │  ├─ Login.css
+│     │  ├─ Register.css
+│     │  ├─ Events.css
+│     │  ├─ EventDetail.css
+│     │  ├─ Dashboard.css
+│     │  ├─ Registrations.css
+│     │  ├─ EditEvent.css
+│     │  ├─ EventForm.css
+│     │  ├─ Navbar.css
+│     │  ├─ EventCard.css
+│     │  ├─ Profile.css
+│     │  └─ Auth.css
+│     └─ components/
+│        ├─ Navbar.jsx
+│        ├─ EventForm.jsx
+│        └─ EventCard.jsx
 │
 ├─ .github/
-│   └─ workflows/
-│       └─ deploy.yml
+│  └─ workflows/
+│     └─ deploy.yml
 │
+├─ node_modules/
+├─ package.json
+├─ package-lock.json
 └─ README.md
-https://student-events-app.onrender.com
+
