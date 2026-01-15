@@ -4,15 +4,14 @@ import '../pages/css/Profile.css'
 
 export default function Profile() {
   const [user, setUser] = useState(null)
+  const [oldPassword, setOldPassword] = useState('')
+  const [newPassword, setNewPassword] = useState('')
+  const [success, setSuccess] = useState('')
 
   useEffect(() => {
     async function loadProfile() {
       try {
-        const token = localStorage.getItem('token')
-        const [oldPassword, setOldPassword] = useState('')
-        const [newPassword, setNewPassword] = useState('')
-        const [success, setSuccess] = useState('')
-        const data = await apiRequest('/profile', 'GET', null, token) // token ajouté
+        const data = await apiRequest('/profile')
         setUser(data)
       } catch (err) {
         console.error('Erreur chargement profil:', err)
@@ -28,17 +27,21 @@ export default function Profile() {
     const formData = new FormData()
     formData.append('avatar', file)
 
-    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/profile/avatar`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-      body: formData,
-    })
-
-    const data = await res.json()
-    setUser({ ...user, avatar: data.avatar })
+    try {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/profile/avatar`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: formData,
+      })
+      const data = await res.json()
+      setUser({ ...user, avatar: data.avatar })
+    } catch (err) {
+      console.error('Erreur upload avatar:', err)
+    }
   }
+
   async function handleChangePassword(e) {
     e.preventDefault()
     try {
@@ -47,7 +50,7 @@ export default function Profile() {
       setOldPassword('')
       setNewPassword('')
     } catch (err) {
-      alert(err.message)
+      alert(err.message || 'Erreur lors de la modification du mot de passe')
     }
   }
 
@@ -60,6 +63,7 @@ export default function Profile() {
       <img
         src={user.avatar || '/default-avatar.png'}
         className="profile-avatar"
+        alt="Avatar"
       />
 
       <label className="upload-btn">
@@ -70,16 +74,30 @@ export default function Profile() {
       <div className="profile-info">
         <p><strong>Nom :</strong> {user.name}</p>
         <p><strong>Email :</strong> {user.email}</p>
+        <p><strong>Rôle :</strong> {user.role.toUpperCase()}</p>
         <p><strong>Inscrit le :</strong> {new Date(user.created_at).toLocaleDateString()}</p>
       </div>
-      // Formulaire JSX
-      <form onSubmit={handleChangePassword}>
-        <input type="password" placeholder="Mot de passe actuel" value={oldPassword} onChange={e => setOldPassword(e.target.value)} required />
-        <input type="password" placeholder="Nouveau mot de passe" value={newPassword} onChange={e => setNewPassword(e.target.value)} required />
+
+      <h2>Modifier le mot de passe</h2>
+      <form onSubmit={handleChangePassword} className="password-form">
+        <input
+          type="password"
+          placeholder="Mot de passe actuel"
+          value={oldPassword}
+          onChange={e => setOldPassword(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Nouveau mot de passe"
+          value={newPassword}
+          onChange={e => setNewPassword(e.target.value)}
+          required
+        />
         <button type="submit">Modifier le mot de passe</button>
       </form>
-      {success && <p>{success}</p>}
+
+      {success && <p className="success-msg">{success}</p>}
     </div>
-    
   )
 }
