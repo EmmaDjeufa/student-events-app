@@ -7,59 +7,92 @@ import Events from './pages/Events'
 import EventDetail from './pages/EventDetail'
 import Dashboard from './pages/Dashboard'
 import Registrations from './pages/Registrations'
-import './App.css'
 import AddEvent from './pages/AddEvent'
 import EditEvent from './pages/EditEvent'
 import Profile from './pages/Profile'
 import AdminLogin from './pages/AdminLogin'
+import './App.css'
 
-
-
-/* Route protégée : accessible uniquement si token existant */
+/* Route protégée */
 function ProtectedRoute({ children }) {
   const token = localStorage.getItem('token')
-  return token ? children : <Navigate to="/login" />
+  return token ? children : <Navigate to="/login" replace />
 }
 
-/* Route Auth : accessible uniquement si pas connecté */
+/* Route auth-only (login/register) */
 function AuthRoute({ children }) {
   const token = localStorage.getItem('token')
-  return token ? <Navigate to="/dashboard" /> : children
+  return token ? <Navigate to="/dashboard" replace /> : children
 }
 
 function App() {
   return (
     <>
       <Navbar />
+
       <div className="p-4">
         <Routes>
-          {/* Page d'accueil */}
+          {/* Public */}
           <Route path="/" element={<Home />} />
-
-          {/* Routes d'authentification */}
-          <Route path="/login" element={<AuthRoute><Login /></AuthRoute>} />
-          <Route path="/register" element={<AuthRoute><Register /></AuthRoute>} />
-
-          {/* Pages publiques */}
           <Route path="/events" element={<Events />} />
           <Route path="/events/:id" element={<EventDetail />} />
           <Route path="/registrations" element={<Registrations />} />
+          <Route path="/admin-login" element={<AdminLogin />} />
 
-          {/* Pages protégées */}
-          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          {/* Auth */}
           <Route
-            path="/events/add"
-            element={<ProtectedRoute><div>Formulaire Ajouter Événement</div></ProtectedRoute>}
+            path="/login"
+            element={
+              <AuthRoute>
+                <Login />
+              </AuthRoute>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <AuthRoute>
+                <Register />
+              </AuthRoute>
+            }
+          />
+
+          {/* Protected */}
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/profile"
             element={
-              localStorage.getItem('token') ? <Profile /> : <Navigate to="/login" />
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
             }
           />
-          <Route path="/add-event" element={<AddEvent />} />
-          <Route path="/events/edit/:id" element={<ProtectedRoute><EditEvent /></ProtectedRoute>} />
-          <Route path="/admin-login" element={<AdminLogin />} />
+          <Route
+            path="/add-event"
+            element={
+              <ProtectedRoute>
+                <AddEvent />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/events/edit/:id"
+            element={
+              <ProtectedRoute>
+                <EditEvent />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Fallback */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
     </>
