@@ -1,7 +1,7 @@
 // src/components/EventForm.jsx
 import { useState } from 'react'
 import { apiRequest } from '../api/api'
-import './css/EventForm.css'
+import '../pages/css/EventForm.css'
 
 export default function EventForm({ onSuccess }) {
   const [title, setTitle] = useState('')
