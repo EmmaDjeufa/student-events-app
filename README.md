@@ -25,6 +25,7 @@ student-events-app/
 │  ├─ controllers/
 │  │  ├─ authController.js
 │  │  ├─ eventController.js
+|  |  ├─ profileController.js
 │  │  └─ registrationController.js
 │  ├─ models/
 │  │  ├─ User.js

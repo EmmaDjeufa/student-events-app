@@ -1,18 +1,84 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 2rem;
+  background-color: #1f2937;
+  color: white;
+  position: relative;
+  z-index: 1002;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.nav-links button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  text-align: left;
+}
+
+.nav-btn {
+  padding: 0.4rem 0.8rem;
+  background-color: #3b82f6;
+  border-radius: 0.3rem;
+}
+
+.logout {
+  background-color: #ef4444;
+}
+
+.secondary {
+  background-color: #10b981;
+}
+
+/* Burger */
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.burger .line {
+  width: 26px;
+  height: 3px;
+  background-color: white;
+}
+
 /* Overlay derrière le menu */
 .nav-overlay {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.45);
-  z-index: 999;
+  z-index: 1000;
 }
 
-/* Navbar au-dessus de l’overlay */
-.navbar {
-  position: relative;
-  z-index: 1002;
-}
+/* Mobile */
+@media (max-width: 768px) {
+  .burger {
+    display: flex;
+  }
 
-/* Menu toujours AU-DESSUS de l’overlay */
-.nav-links {
-  z-index: 1003;
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 100%;
+    background-color: #1f2937;
+    flex-direction: column;
+    padding: 1rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+
+  .nav-links.open {
+    max-height: 500px;
+  }
 }
