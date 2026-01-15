@@ -35,3 +35,19 @@ exports.updatePassword = async (req, res) => {
     res.status(500).json({ message: 'Erreur serveur' })
   }
 }
+
+
+// UPLOAD avatar
+exports.uploadAvatar = async (req, res) => {
+  try {
+    if (!req.file) return res.status(400).json({ message: 'Fichier manquant' })
+
+    const avatarUrl = `/uploads/avatars/${req.file.filename}`
+    await pool.query('UPDATE users SET avatar=$1 WHERE id=$2', [avatarUrl, req.user.id])
+
+    res.json({ avatar: avatarUrl })
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({ message: 'Erreur serveur' })
+  }
+}
