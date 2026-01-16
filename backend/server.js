@@ -4,7 +4,14 @@ const path = require('path')
 
 const app = express()
 
-app.use(cors())
+app.use(cors({
+  origin: [
+    'https://student-events-app-2.onrender.com', // frontend déployé
+    'http://localhost:5173' // frontend local
+  ],
+  credentials: true, // si tu veux envoyer cookies
+}))
+
 app.use(express.json())
 
 // ROUTES API
