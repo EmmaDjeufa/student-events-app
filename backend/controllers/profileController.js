@@ -1,7 +1,8 @@
 const pool = require('../config/db')
-const bcrypt = require('bcrypt')
 const path = require('path')
+const fs = require('fs')
 
+// GET profil
 exports.getProfile = async (req, res) => {
   try {
     const userRes = await pool.query(
@@ -15,9 +16,12 @@ exports.getProfile = async (req, res) => {
   }
 }
 
+// PUT mot de passe
 exports.updatePassword = async (req, res) => {
   try {
+    const bcrypt = require('bcrypt')
     const { oldPassword, newPassword } = req.body
+
     const userRes = await pool.query('SELECT password FROM users WHERE id=$1', [req.user.id])
     const user = userRes.rows[0]
 
@@ -34,14 +38,19 @@ exports.updatePassword = async (req, res) => {
   }
 }
 
+// POST avatar
 exports.uploadAvatar = async (req, res) => {
   try {
     if (!req.file) return res.status(400).json({ message: 'Fichier manquant' })
 
+    // Stocke le chemin relatif en DB
     const avatarPath = `/uploads/avatars/${req.file.filename}`
+
     await pool.query('UPDATE users SET avatar=$1 WHERE id=$2', [avatarPath, req.user.id])
 
-    res.json({ avatar: avatarPath })
+    // Retourne URL complète pour le frontend
+    const fullUrl = `${process.env.VITE_BACKEND_URL || 'http://localhost:5000'}${avatarPath}`
+    res.json({ avatar: fullUrl })
   } catch (err) {
     console.error('UPLOAD AVATAR ERROR:', err)
     res.status(500).json({ message: 'Erreur serveur' })
