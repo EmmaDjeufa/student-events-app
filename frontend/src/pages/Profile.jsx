@@ -73,11 +73,11 @@ export default function Profile() {
       <h1>Mon profil</h1>
 
       <img
-        src={user.avatar}
+        src={user.avatar} 
       />
 
       <label className="upload-btn">
-        Changer la photo
+        Modifier la photo
         <input type="file" hidden onChange={handleUpload} />
       </label>
 
