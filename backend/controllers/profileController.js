@@ -4,16 +4,11 @@ const fs = require('fs')
 
 // GET profil
 exports.getProfile = async (req, res) => {
-  try {
-    const userRes = await pool.query(
-      'SELECT id, name, email, role, avatar, created_at FROM users WHERE id=$1',
-      [req.user.id]
-    )
-    res.json(userRes.rows[0])
-  } catch (err) {
-    console.error('GET PROFILE ERROR:', err)
-    res.status(500).json({ message: 'Erreur serveur' })
-  }
+  const { rows } = await pool.query(
+    'SELECT id, name, email, role, avatar, created_at FROM users WHERE id=$1',
+    [req.user.id]
+  )
+  res.json(rows[0])
 }
 
 // PUT mot de passe
@@ -38,21 +33,17 @@ exports.updatePassword = async (req, res) => {
   }
 }
 
-// POST avatar
+
+// UPLOAD AVATAR
 exports.uploadAvatar = async (req, res) => {
-  try {
-    if (!req.file) return res.status(400).json({ message: 'Fichier manquant' })
+  if (!req.file) return res.status(400).json({ message: 'Aucun fichier' })
 
-    // Stocke le chemin relatif en DB
-    const avatarPath = `/uploads/avatars/${req.file.filename}`
+  const avatarUrl = req.file.path // URL Cloudinary
 
-    await pool.query('UPDATE users SET avatar=$1 WHERE id=$2', [avatarPath, req.user.id])
+  await pool.query(
+    'UPDATE users SET avatar=$1 WHERE id=$2',
+    [avatarUrl, req.user.id]
+  )
 
-    // Retourne URL complète pour le frontend
-    const fullUrl = `${process.env.VITE_BACKEND_URL || 'http://localhost:5000'}${avatarPath}`
-    res.json({ avatar: fullUrl })
-  } catch (err) {
-    console.error('UPLOAD AVATAR ERROR:', err)
-    res.status(500).json({ message: 'Erreur serveur' })
-  }
+  res.json({ avatar: avatarUrl })
 }
