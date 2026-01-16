@@ -74,7 +74,6 @@ export default function Profile() {
 
       <img
         src={user.avatar || '/default-avatar.png'}
-        alt="Avatar"
         className="profile-avatar"
       />
 

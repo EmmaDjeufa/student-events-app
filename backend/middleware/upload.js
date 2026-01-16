@@ -7,6 +7,7 @@ const storage = new CloudinaryStorage({
   params: {
     folder: 'avatars',
     allowed_formats: ['jpg', 'png', 'jpeg'],
+    public_id: (req) => `avatar-${req.user.id}`,
   },
 })
 
