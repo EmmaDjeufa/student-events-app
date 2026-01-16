@@ -29,19 +29,29 @@ export default function Profile() {
     formData.append('avatar', file)
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/profile/avatar`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-        body: formData,
-      })
+      const res = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/profile/avatar`,
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+          body: formData,
+        }
+      )
+
+      if (!res.ok) {
+        const text = await res.text()
+        throw new Error(text)
+      }
+
       const data = await res.json()
-      setUser({ ...user, avatar: `${import.meta.env.VITE_BACKEND_URL}${data.avatar}` })
+      setUser(prev => ({ ...prev, avatar: data.avatar }))
     } catch (err) {
       console.error('Erreur upload avatar:', err)
     }
   }
+
 
   async function handleChangePassword(e) {
     e.preventDefault()
