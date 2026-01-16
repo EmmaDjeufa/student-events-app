@@ -73,8 +73,11 @@ export default function Profile() {
       <h1>Mon profil</h1>
 
       <img
-        src={user.avatar} 
+        src={user.avatar || 'https://ui-avatars.com/api/?name=' + user.name}
+        alt="Avatar"
+        className="profile-avatar"
       />
+
 
       <label className="upload-btn">
         Modifier la photo

@@ -8,7 +8,21 @@ const {
   uploadAvatar,
 } = require('../controllers/profileController')
 
-router.get('/', auth, getProfile)
+router.get('/', auth, async (req, res) => {
+  const result = await pool.query(
+    'SELECT id, name, email, role, created_at, avatar FROM users WHERE id=$1',
+    [req.user.id]
+  )
+
+  const user = result.rows[0]
+
+  if (!user.avatar) {
+    user.avatar = 'https://ui-avatars.com/api/?name=' + encodeURIComponent(user.name)
+  }
+
+  res.json(user)
+})
+
 router.put('/password', auth, updatePassword)
 router.post('/avatar', auth, upload.single('avatar'), uploadAvatar)
 
