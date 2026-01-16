@@ -13,11 +13,7 @@ app.use('/api/events', require('./routes/events'))
 app.use('/api/registrations', require('./routes/registrations'))
 app.use('/api/profile', require('./routes/profile'))
 app.use('/api/users', require('./routes/users'))
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
-
-// fichiers uploadés
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 // ⚠️ PAS DE app.get('/') ici pour un backend API
 const PORT = process.env.PORT || 5000

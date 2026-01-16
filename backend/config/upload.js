@@ -12,11 +12,10 @@ const storage = new CloudinaryStorage({
   cloudinary,
   params: {
     folder: 'avatars',
-    allowed_formats: ['jpg', 'png', 'jpeg'],
-    transformation: [{ width: 300, height: 300, crop: 'fill' }],
+    allowed_formats: ['jpg', 'jpeg', 'png'],
   },
 })
 
 const upload = multer({ storage })
 
-module.exports = { upload, cloudinary }
+module.exports = { upload }
