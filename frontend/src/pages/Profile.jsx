@@ -73,7 +73,7 @@ export default function Profile() {
       <h1>Mon profil</h1>
 
       <img
-        src={user.avatar || 'https://ui-avatars.com/api/?name=' + user.name}
+        src={user.avatar || '/default-avatar.png'}
         alt="Avatar"
         className="profile-avatar"
       />
