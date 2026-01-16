@@ -63,9 +63,7 @@ export default function Profile() {
       <h1>Mon profil</h1>
 
       <img
-        src={user.avatar || '/default-avatar.png'}
-        className="profile-avatar"
-        alt="Avatar"
+        src={user.avatar}
       />
 
       <label className="upload-btn">
