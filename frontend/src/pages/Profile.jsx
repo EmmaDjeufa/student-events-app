@@ -73,10 +73,9 @@ export default function Profile() {
       <h1>Mon profil</h1>
 
       <img
-        src={user.avatar || '/default-avatar.png'}
-        className="profile-avatar"
+        src={user.avatar || 'https://via.placeholder.com/150'}
+        className="avatar"
       />
-
 
       <label className="upload-btn">
         Modifier la photo

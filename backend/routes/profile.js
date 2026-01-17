@@ -16,6 +16,16 @@ router.get('/', auth, getProfile)
 router.put('/password', auth, updatePassword)
 
 // Upload avatar via Cloudinary
-router.post('/avatar', auth, upload.single('avatar'), uploadAvatar)
+router.post(
+  '/avatar',
+  auth,
+  upload.single('avatar'),
+  (req, res, next) => {
+    console.log('REQ.FILE:', req.file)
+    console.log('REQ.USER:', req.user)
+    next()
+  },
+  uploadAvatar
+)
 
 module.exports = router

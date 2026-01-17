@@ -41,7 +41,7 @@ exports.updatePassword = async (req, res) => {
 // POST avatar
 exports.uploadAvatar = async (req, res) => {
   try {
-    console.log('FILE:', req.file)
+    console.log('UPLOAD CONTROLLER FILE:', req.file)
 
     if (!req.file || !req.file.secure_url) {
       return res.status(400).json({ message: 'Upload Cloudinary échoué' })
@@ -60,5 +60,6 @@ exports.uploadAvatar = async (req, res) => {
     res.status(500).json({ message: 'Erreur serveur' })
   }
 }
+
 
 
