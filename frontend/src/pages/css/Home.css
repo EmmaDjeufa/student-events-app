@@ -3,12 +3,13 @@
   min-height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: clamp(30px, 6vw, 100px);
+  justify-content: space-between; /* desktop */
+  padding: clamp(20px, 4vw, 60px)  clamp(30px, 6vw, 100px); /* moins d'espace haut/bas */
   background: linear-gradient(135deg, #f6f8ff, #eef1ff);
   overflow: hidden;
   position: relative;
-  gap: 40px; /* espacement normal */
+  gap: 30px; /* moins d'espace entre éléments */
+  flex-wrap: wrap;
 }
 
 /* ===== TEXTE ===== */
@@ -58,47 +59,19 @@
 }
 
 /* Animations danse */
-.head {
-  animation: head 2s infinite ease-in-out;
-}
+.head { animation: head 2s infinite ease-in-out; }
+.arm-left { transform-origin: right center; animation: armL 1.4s infinite ease-in-out; }
+.arm-right { transform-origin: left center; animation: armR 1.4s infinite ease-in-out; }
+.leg-left { transform-origin: top center; animation: legL 1.2s infinite ease-in-out; }
+.leg-right { transform-origin: top center; animation: legR 1.2s infinite ease-in-out; }
 
-.arm-left {
-  transform-origin: right center;
-  animation: armL 1.4s infinite ease-in-out;
-}
+@keyframes head { 50% { transform: rotate(6deg); } }
+@keyframes armL { 50% { transform: rotate(-40deg); } }
+@keyframes armR { 50% { transform: rotate(40deg); } }
+@keyframes legL { 50% { transform: rotate(-15deg); } }
+@keyframes legR { 50% { transform: rotate(15deg); } }
 
-.arm-right {
-  transform-origin: left center;
-  animation: armR 1.4s infinite ease-in-out;
-}
-
-.leg-left {
-  transform-origin: top center;
-  animation: legL 1.2s infinite ease-in-out;
-}
-
-.leg-right {
-  transform-origin: top center;
-  animation: legR 1.2s infinite ease-in-out;
-}
-
-@keyframes head {
-  50% { transform: rotate(6deg); }
-}
-@keyframes armL {
-  50% { transform: rotate(-40deg); }
-}
-@keyframes armR {
-  50% { transform: rotate(40deg); }
-}
-@keyframes legL {
-  50% { transform: rotate(-15deg); }
-}
-@keyframes legR {
-  50% { transform: rotate(15deg); }
-}
-
-/* ===== ORBES ANIMÉES ===== */
+/* ===== ORBES ===== */
 .orb {
   position: absolute;
   border-radius: 50%;
@@ -106,37 +79,11 @@
   opacity: 0.6;
   animation: float 10s infinite ease-in-out;
 }
+.orb1 { width: 120px; height: 120px; background: #6b5cff; top: 20%; left: 10%; }
+.orb2 { width: 80px; height: 80px; background: #ff7ac6; top: 60%; left: 25%; animation-duration: 14s; }
+.orb3 { width: 150px; height: 150px; background: #7fd1ff; bottom: 10%; right: 15%; animation-duration: 18s; }
 
-.orb1 {
-  width: 120px;
-  height: 120px;
-  background: #6b5cff;
-  top: 20%;
-  left: 10%;
-}
-
-.orb2 {
-  width: 80px;
-  height: 80px;
-  background: #ff7ac6;
-  top: 60%;
-  left: 25%;
-  animation-duration: 14s;
-}
-
-.orb3 {
-  width: 150px;
-  height: 150px;
-  background: #7fd1ff;
-  bottom: 10%;
-  right: 15%;
-  animation-duration: 18s;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-40px); }
-}
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-40px); } }
 
 /* ===== GLOW ===== */
 .glow {
@@ -153,25 +100,28 @@
 @media (max-width: 900px) {
   .home {
     flex-direction: column;
-    text-align: center;
-    gap: 30px;
+    justify-content: flex-start; /* commence sous la navbar */
+    align-items: center;
+    gap: 16px; /* moins d'espace entre robot et texte */
+    padding-top: 40px; /* plus proche de la barre */
   }
 
   .dancer {
-    margin-top: 40px;
+    margin-top: 0; /* plus d'espace inutile */
   }
 }
 
 /* ===== PETIT ÉCRAN (<480px) ===== */
 @media (max-width: 480px) {
   .home {
-    padding: 24px 20px;
-    gap: 12px; /* réduit l'espace entre robot et bouton x3 */
+    padding: 4px 2px; /* réduit encore le padding haut/bas */
+    justify-content: center;
+    gap: 2px; /* presque aucun espace entre robot et texte */
   }
 
   .home-content h1 {
     font-size: 1.6rem;
-    margin-bottom: 16px;
+    margin-bottom: 2px; /* très proche du bouton */
     line-height: 1.15;
   }
 
@@ -181,7 +131,8 @@
   }
 
   .dancer {
-    width: 150px; /* 1.5x plus petit */
-    margin-top: 12px; /* rapproché du bouton */
+    width: 150px; /* robot réduit */
+    margin-top: -4px; /* robot collé au bouton */
   }
 }
+
