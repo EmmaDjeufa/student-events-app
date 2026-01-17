@@ -1,11 +1,12 @@
 const cloudinary = require('cloudinary').v2
+require('dotenv').config()
 
-console.log('CLOUDINARY CONFIG CHECK', {
-  cloud: process.env.CLOUDINARY_NAME,
-  keyPresent: !!process.env.CLOUDINARY_KEY,
-  secretPresent: !!process.env.CLOUDINARY_SECRET,
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET,
 })
 
-
+console.log('✅ Cloudinary configuré:', cloudinary.config().cloud_name)
 
 module.exports = cloudinary

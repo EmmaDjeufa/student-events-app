@@ -41,13 +41,13 @@ exports.updatePassword = async (req, res) => {
 // POST avatar
 exports.uploadAvatar = async (req, res) => {
   try {
-    console.log('UPLOAD CONTROLLER FILE:', req.file)
+    console.log('FILE:', req.file)
 
-    if (!req.file || !req.file.secure_url) {
-      return res.status(400).json({ message: 'Upload Cloudinary échoué' })
+    if (!req.file || !req.file.path) {
+      return res.status(400).json({ message: 'Aucun fichier reçu' })
     }
 
-    const avatarUrl = req.file.secure_url
+    const avatarUrl = req.file.path
 
     await pool.query(
       'UPDATE users SET avatar=$1 WHERE id=$2',
@@ -57,9 +57,8 @@ exports.uploadAvatar = async (req, res) => {
     res.json({ avatar: avatarUrl })
   } catch (err) {
     console.error('UPLOAD AVATAR ERROR:', err)
-    res.status(500).json({ message: 'Erreur serveur' })
+    res.status(500).json({ message: 'Erreur serveur avatar' })
   }
 }
-
 
 

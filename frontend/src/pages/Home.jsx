@@ -6,41 +6,35 @@ export default function Home() {
 
   return (
     <section className="home">
+      {/* Contenu texte */}
       <div className="home-content">
         <h1>
-          Bienvenue dans <span>l’univers étudiant</span>
+          L’univers étudiant <span>en mouvement</span>
         </h1>
-        <p>
-          Événements, rencontres et expériences uniques.
-          <br />
-          Vis ta vie étudiante à fond 🚀
-        </p>
 
         <button className="home-btn" onClick={() => navigate("/events")}>
-          Découvrir les événements
+          Explorer les événements
         </button>
       </div>
 
-      {/* Personnage qui danse */}
+      {/* Robot danseur */}
       <div className="dancer">
         <svg viewBox="0 0 200 400" className="dancer-svg">
-          {/* tête */}
           <circle cx="100" cy="50" r="25" className="head" />
-
-          {/* corps */}
-          <rect x="90" y="80" width="20" height="100" rx="10" className="body" />
-
-          {/* bras */}
+          <rect x="90" y="80" width="20" height="100" rx="10" />
           <rect x="40" y="90" width="80" height="15" rx="8" className="arm arm-left" />
           <rect x="80" y="90" width="80" height="15" rx="8" className="arm arm-right" />
-
-          {/* jambes */}
           <rect x="85" y="180" width="15" height="100" rx="8" className="leg leg-left" />
           <rect x="100" y="180" width="15" height="100" rx="8" className="leg leg-right" />
         </svg>
       </div>
 
-      {/* décor */}
+      {/* Orbes décoratives */}
+      <span className="orb orb1"></span>
+      <span className="orb orb2"></span>
+      <span className="orb orb3"></span>
+
+      {/* Glow arrière-plan */}
       <div className="glow"></div>
     </section>
   );

@@ -1,137 +1,187 @@
+/* ===== LAYOUT ===== */
 .home {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 8vw;
-  background: radial-gradient(circle at top, #1e1e3f, #0b0b16);
-  color: white;
+  padding: clamp(30px, 6vw, 100px);
+  background: linear-gradient(135deg, #f6f8ff, #eef1ff);
   overflow: hidden;
   position: relative;
+  gap: 40px; /* espacement normal */
 }
 
-/* TEXTE */
+/* ===== TEXTE ===== */
 .home-content {
-  max-width: 600px;
   z-index: 2;
 }
 
 .home-content h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  line-height: 1.1;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 700;
   margin-bottom: 20px;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: #1b1b2f;
 }
 
 .home-content h1 span {
-  color: #7f5af0;
+  color: #6b5cff;
 }
 
-.home-content p {
-  font-size: 1.1rem;
-  opacity: 0.8;
-  margin-bottom: 30px;
-}
-
-/* BOUTON */
+/* ===== BOUTON ===== */
 .home-btn {
-  padding: 15px 35px;
+  padding: 14px 36px;
   font-size: 1rem;
+  border-radius: 999px;
   border: none;
-  border-radius: 50px;
-  background: linear-gradient(135deg, #7f5af0, #5a35d6);
-  color: white;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s;
+  background: linear-gradient(135deg, #6b5cff, #8f84ff);
+  color: white;
+  transition: all 0.3s ease;
 }
 
 .home-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(127, 90, 240, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 25px rgba(107, 92, 255, 0.35);
 }
 
-/* PERSONNAGE */
+/* ===== DANSEUR ===== */
 .dancer {
-  width: 300px;
+  width: clamp(220px, 35vw, 320px);
   z-index: 2;
 }
 
 .dancer-svg {
   width: 100%;
-  fill: #ffffff;
+  fill: #0066ff; /* robot bleu */
 }
 
-/* ANIMATIONS */
+/* Animations danse */
 .head {
-  animation: headMove 2s infinite ease-in-out;
+  animation: head 2s infinite ease-in-out;
 }
 
 .arm-left {
   transform-origin: right center;
-  animation: armLeft 1.5s infinite ease-in-out;
+  animation: armL 1.4s infinite ease-in-out;
 }
 
 .arm-right {
   transform-origin: left center;
-  animation: armRight 1.5s infinite ease-in-out;
+  animation: armR 1.4s infinite ease-in-out;
 }
 
 .leg-left {
   transform-origin: top center;
-  animation: legLeft 1.2s infinite ease-in-out;
+  animation: legL 1.2s infinite ease-in-out;
 }
 
 .leg-right {
   transform-origin: top center;
-  animation: legRight 1.2s infinite ease-in-out;
+  animation: legR 1.2s infinite ease-in-out;
 }
 
-/* KEYFRAMES */
-@keyframes headMove {
-  0%, 100% { transform: rotate(0deg); }
-  50% { transform: rotate(5deg); }
+@keyframes head {
+  50% { transform: rotate(6deg); }
 }
-
-@keyframes armLeft {
-  0%, 100% { transform: rotate(20deg); }
-  50% { transform: rotate(-30deg); }
+@keyframes armL {
+  50% { transform: rotate(-40deg); }
 }
-
-@keyframes armRight {
-  0%, 100% { transform: rotate(-20deg); }
-  50% { transform: rotate(30deg); }
+@keyframes armR {
+  50% { transform: rotate(40deg); }
 }
-
-@keyframes legLeft {
-  0%, 100% { transform: rotate(5deg); }
+@keyframes legL {
   50% { transform: rotate(-15deg); }
 }
-
-@keyframes legRight {
-  0%, 100% { transform: rotate(-5deg); }
+@keyframes legR {
   50% { transform: rotate(15deg); }
 }
 
-/* GLOW */
+/* ===== ORBES ANIMÉES ===== */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(10px);
+  opacity: 0.6;
+  animation: float 10s infinite ease-in-out;
+}
+
+.orb1 {
+  width: 120px;
+  height: 120px;
+  background: #6b5cff;
+  top: 20%;
+  left: 10%;
+}
+
+.orb2 {
+  width: 80px;
+  height: 80px;
+  background: #ff7ac6;
+  top: 60%;
+  left: 25%;
+  animation-duration: 14s;
+}
+
+.orb3 {
+  width: 150px;
+  height: 150px;
+  background: #7fd1ff;
+  bottom: 10%;
+  right: 15%;
+  animation-duration: 18s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-40px); }
+}
+
+/* ===== GLOW ===== */
 .glow {
   position: absolute;
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, #7f5af055, transparent 70%);
-  right: -150px;
-  bottom: -150px;
-  filter: blur(60px);
+  background: radial-gradient(circle, #6b5cff55, transparent 70%);
+  right: -20%;
+  bottom: -20%;
+  filter: blur(80px);
 }
 
-/* RESPONSIVE */
+/* ===== MOBILE ===== */
 @media (max-width: 900px) {
   .home {
     flex-direction: column;
-    justify-content: center;
     text-align: center;
+    gap: 30px;
   }
 
   .dancer {
-    margin-top: 50px;
-    width: 220px;
+    margin-top: 40px;
+  }
+}
+
+/* ===== PETIT ÉCRAN (<480px) ===== */
+@media (max-width: 480px) {
+  .home {
+    padding: 24px 20px;
+    gap: 12px; /* réduit l'espace entre robot et bouton x3 */
+  }
+
+  .home-content h1 {
+    font-size: 1.6rem;
+    margin-bottom: 16px;
+    line-height: 1.15;
+  }
+
+  .home-btn {
+    padding: 8px 18px;
+    font-size: 0.8rem;
+  }
+
+  .dancer {
+    width: 150px; /* 1.5x plus petit */
+    margin-top: 12px; /* rapproché du bouton */
   }
 }
