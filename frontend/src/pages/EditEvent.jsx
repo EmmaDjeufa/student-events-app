@@ -41,15 +41,16 @@ export default function EditEvent() {
    }
 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    try {
-      await apiRequest(`/events/${id}`, 'PUT', { title, description, date })
-      navigate('/dashboard')
-    } catch (err) {
-      setError('Erreur lors de la modification de l’événement.')
-    }
+  const handleSubmit = async () => {
+    const formattedDate = new Date(dateInput).toISOString().split('T')[0] // yyyy-MM-dd
+
+    await apiRequest(`/events/${event.id}`, 'PUT', {
+      title,
+      description,
+      date: formattedDate,
+    })
   }
+
 
   if (loading) return <p className="p-6">Chargement...</p>
 

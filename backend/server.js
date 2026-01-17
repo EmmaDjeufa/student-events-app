@@ -9,7 +9,7 @@ const app = express()
 app.use(cors({
   origin: [
     'https://student-events-app-2.onrender.com', // frontend déployé
-    'http://localhost:5173' // frontend local
+    'https://friendly-doodle-grrq94qggrxcwqgg-5173.app.github.dev', // frontend local
   ],
   credentials: true
 }))

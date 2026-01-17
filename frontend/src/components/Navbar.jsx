@@ -32,31 +32,27 @@ export default function Navbar() {
     navigate('/')
   }
 
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
   const closeMenu = () => setIsMenuOpen(false)
 
   return (
     <>
-      {isMenuOpen && (
-        <div
-          className="nav-overlay"
-          onClick={closeMenu}
-        />
-      )}
+      {/* Overlay pour fermer le menu */}
+      {isMenuOpen && <div className="nav-overlay" onClick={closeMenu} />}
 
       <nav className="navbar">
         <Link to="/" className="logo" onClick={closeMenu}>
           Student Events
         </Link>
 
-        <div
-          className={`burger ${isMenuOpen ? 'open' : ''}`}
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
+        {/* Burger menu */}
+        <div className={`burger ${isMenuOpen ? 'open' : ''}`} onClick={toggleMenu}>
           <div className="line" />
           <div className="line" />
           <div className="line" />
         </div>
 
+        {/* Menu liens */}
         <div className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
           <Link to="/events" onClick={closeMenu}>Événements</Link>
           <Link to="/registrations" onClick={closeMenu}>Inscrits</Link>
