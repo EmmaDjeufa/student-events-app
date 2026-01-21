@@ -1,134 +1,145 @@
-# student-events-app
 
-(sudo -i ,
-- sudo -u postgres psql (\c student_events_db)
-- sudo service postgresql status
-- sudo service postgresql start)
+# Student Events App 🚀
 
-(sudo service postgresql start
-)
+A full-stack web application for managing student events, registrations, and user profiles.  
+Administrators can create, edit, and delete events, while students can view events and register.
 
+## Live Demo
+[Your Live App URL here]
 
-student-events-app/
-├─ backend/
-│  ├─ package.json
-│  ├─ package-lock.json
-│  ├─ server.js
-│  ├─ .env
-│  ├─ config/
-│  │  ├─ db.js
-|  |  ├─ cloudinary.js
-│  │  └─ upload.js
-│  ├─ middleware/
-│  │  ├─ auth.js
-│  │  ├─ admin.js
-|  |  ├─ upload.js
-│  │  └─ errorHandler.js
-│  ├─ controllers/
-│  │  ├─ authController.js
-│  │  ├─ eventController.js
-|  |  ├─ profileController.js
-│  │  └─ registrationController.js
-│  ├─ models/
-│  │  ├─ User.js
-│  │  ├─ Event.js
-│  │  └─ Registration.js
-│  ├─ routes/
-│  │  ├─ auth.js
-│  │  ├─ events.js
-│  │  ├─ profile.js
-│  │  ├─ users.js
-│  │  └─ registrations.js
-│  ├─ utils/
-│  │  └─ mailer.js
-│  ├─ uploads/
-│  │  └─ avatars/
-│  └─ tests/
-│     └─ backend.test.js
-│
-├─ frontend/
-│  ├─ package.json
-│  ├─ package-lock.json
-│  ├─ tailwind.config.cjs
-│  ├─ postcss.config.cjs
-│  ├─ vite.config.js
-│  ├─ .env
-│  ├─ .gitignore
-│  ├─ eslint.config.js
-│  ├─ index.html
-│  ├─ dist/
-│  ├─ public/
-│  ├─ node_modules/
-│  └─ src/
-│     ├─ main.jsx
-│     ├─ index.css
-│     ├─ App.jsx
-│     ├─ App.css
-│     ├─ api/
-│     │  └─ api.js
-│     ├─ pages/
-│     │  ├─ Home.jsx
-│     │  ├─ Login.jsx
-│     │  ├─ Register.jsx
-│     │  ├─ Events.jsx
-│     │  ├─ EventDetail.jsx
-│     │  ├─ Dashboard.jsx
-│     │  ├─ Registrations.jsx
-│     │  ├─ AddEvent.jsx
-│     │  ├─ EditEvent.jsx
-│     │  ├─ Profile.jsx
-│     │  └─ AdminLogin.jsx
-│     ├─ pages/css/
-│     │  ├─ Home.css
-│     │  ├─ Login.css
-│     │  ├─ Register.css
-│     │  ├─ Events.css
-|     |  ├─ AddEvent.css
-│     │  ├─ EventDetail.css
-│     │  ├─ Dashboard.css
-│     │  ├─ Registrations.css
-│     │  ├─ EditEvent.css
-│     │  ├─ EventForm.css
-│     │  ├─ Navbar.css
-│     │  ├─ EventCard.css
-│     │  ├─ Profile.css
-│     │  └─ Auth.css
-│     └─ components/
-│        ├─ Navbar.jsx
-│        ├─ EventForm.jsx
-│        └─ EventCard.jsx
-│
-├─ .github/
-│  └─ workflows/
-│     └─ deploy.yml
-│
-├─ node_modules/
-├─ package.json
-├─ package-lock.json
-└─ README.md
+---
 
-const express = require('express')
-const router = express.Router()
-const auth = require('../middleware/auth')
-const multer = require('multer')
-const path = require('path')
-const { getProfile, updatePassword, uploadAvatar } = require('../controllers/profileController')
+## Local Deployment
 
-// Stockage multer
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, '../uploads/avatars'))
-  },
-  filename: (req, file, cb) => {
-    const ext = path.extname(file.originalname)
-    cb(null, `avatar-${req.user.id}${ext}`)
-  },
-})
-const upload = multer({ storage })
+### 1. Clone the Repository
+```bash
+git clone https://github.com/YourUsername/student-events-app.git
+cd student-events-app
+````
 
-// Routes
-router.get('/', auth, getProfile)
-router.put('/password', auth, updatePassword)
-router.post('/avatar', auth, upload.single('avatar'), uploadAvatar)
+### 2. Backend Setup
 
-module.exports = router
+```bash
+cd backend
+npm install
+```
+
+Create a `.env` file in `backend/` and add your configuration:
+
+```env
+PORT=5000
+DATABASE_URL=postgresql://username:password@host/database
+JWT_SECRET=your_jwt_secret
+
+# Cloudinary
+CLOUDINARY_NAME=your_cloud_name
+CLOUDINARY_KEY=your_cloudinary_key
+CLOUDINARY_SECRET=your_cloudinary_secret
+
+# Mailtrap (optional)
+MAILTRAP_HOST=sandbox.smtp.mailtrap.io
+MAILTRAP_PORT=2525
+MAILTRAP_USER=your_mailtrap_user
+MAILTRAP_PASS=your_mailtrap_pass
+
+# Admin code
+ADMIN_CODE=CYtech2026OK
+```
+
+Run the backend development server:
+
+```bash
+npm run dev
+```
+
+The backend API will be available at `http://localhost:5000`.
+
+---
+
+### 3. Frontend Setup
+
+```bash
+cd ../frontend
+npm install
+```
+
+Create a `.env` file in `frontend/`:
+
+```env
+VITE_BACKEND_URL=http://localhost:5000
+```
+
+Run the frontend development server:
+
+```bash
+npm run dev
+```
+
+Access the app at `http://localhost:5173`.
+
+---
+
+### 4. Build for Production
+
+```bash
+npm run build
+```
+
+Output is in the `dist/` folder.
+
+Preview production build:
+
+```bash
+npm run preview
+```
+
+---
+
+## Tech Stack
+
+**Frontend:**
+
+* React, Vite
+* Tailwind CSS
+* JavaScript, HTML, CSS
+
+**Backend:**
+
+* Node.js, Express
+* PostgreSQL (via `pg`)
+* JWT authentication
+* Bcrypt for password hashing
+* Cloudinary for avatar uploads
+* Multer for file handling
+* Nodemailer (optional, Mailtrap for email testing)
+
+**Testing & Dev Tools:**
+
+* Jest & Supertest
+* Nodemon
+* ESLint
+
+---
+
+## Features
+
+* User registration and login (students & admin)
+* JWT-based authentication
+* Profile management with avatar uploads to Cloudinary
+* Create, edit, delete events (admin only)
+* Event registration for students
+* Dashboard for event tracking
+* Secure password update
+
+---
+
+## Feedback & Contributions
+
+* **Feedback:** Open an issue for bugs or suggestions
+* **Contributions:** Fork, update, and submit a pull request
+* **Contact:** Reach via GitHub or email for questions or professional inquiries
+
+---
+
+**Happy coding! 🚀**
+
