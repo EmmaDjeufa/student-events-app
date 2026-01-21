@@ -1,3 +1,4 @@
+/* NAVBAR PRINCIPAL */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -7,15 +8,21 @@
   color: #fff;
   position: relative;
   z-index: 1100;
+  flex-wrap: wrap; /* pour les écrans intermédiaires */
 }
 
-.navbar .logo {
-  font-size: 1.5rem;
+/* LOGO */
+.logo {
+  font-size: 1.5rem; /* desktop */
   font-weight: 700;
   color: #fff;
   text-decoration: none;
+  white-space: nowrap;
+  transition: font-size 0.2s ease;
+  margin-left: 0; /* pousse légèrement à gauche */
 }
 
+/* BURGER */
 .burger {
   display: none;
   flex-direction: column;
@@ -23,10 +30,11 @@
   width: 24px;
   height: 20px;
   cursor: pointer;
-  z-index: 1200;
+  z-index: 1300;
+  position: relative;
 }
 
-.burger .line {
+.burger span {
   height: 3px;
   width: 100%;
   background-color: #fff;
@@ -34,118 +42,131 @@
   transition: all 0.3s ease;
 }
 
-.burger.open .line:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-.burger.open .line:nth-child(2) { opacity: 0; }
-.burger.open .line:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
+.burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+.burger.open span:nth-child(2) { opacity: 0; }
+.burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+.burger-label {
+  font-size: 0.65rem;
+  color: #fff;
+  margin-top: 2px;
+  text-align: center;
+  display: block;
 }
 
-/* ===========================
-   Menu links
-=========================== */
+/* MENU LINKS */
 .nav-links {
   display: flex;
-  gap: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
   align-items: center;
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 100%;
-  width: 260px;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
-  padding: 2rem 1rem;
-  gap: 1.5rem;
-  background-color: #2e3a55;
-  transform: translateX(100%);
-  transition: transform 0.4s ease;
-  z-index: 1200; /* menu toujours au-dessus */
-  overflow-y: auto;
-  border-left: 1px solid rgba(255,255,255,0.1);
-  border-radius: 8px 0 0 8px;
 }
-
-.nav-links.open { transform: translateX(0); }
 
 .nav-links a,
 .nav-links button {
-  opacity: 0;
-  transform: translateX(20px);
-  transition: all 0.3s ease;
-  width: 100%;
-  text-align: center;
-  color: #fff;
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
   font-weight: 500;
+  color: #fff;
   text-decoration: none;
-  padding: 0.5rem 0.8rem;
-  border-radius: 4px;
   background: transparent;
   border: none;
   cursor: pointer;
-}
-
-.nav-links.open a,
-.nav-links.open button {
-  opacity: 1;
-  transform: translateX(0);
+  transition: background 0.2s ease;
 }
 
 .nav-links a:hover,
 .nav-links button:hover { background: rgba(255,255,255,0.1); }
 
-/* ===========================
-   Badge admin
-=========================== */
-.admin-badge {
-  background-color: #facc15;
-  color: #000;
-  font-weight: bold;
-  font-size: 0.75rem;
-  padding: 0.2rem 0.5rem;
-  border-radius: 0.25rem;
-  margin-left: 0.5rem;
-}
+/* HIGHLIGHT */
+.nav-highlight { background-color: #2563eb; font-weight: 600; }
 
-/* ===========================
-   Highlight “Événements”
-=========================== */
-.nav-highlight {
-  background-color: #2563eb; /* un bleu foncé */
+/* CTA AJOUTER EVENEMENT */
+.nav-cta {
+  background: linear-gradient(135deg, #6b5cff, #8f84ff);
+  color: #fff;
   font-weight: 600;
 }
 
-/* ===========================
-   Responsive mobile
-=========================== */
-@media (max-width: 768px) {
-  .burger { display: flex; }
+/* ADMIN BADGE */
+.admin-badge {
+  background-color: #facc15;
+  color: #000;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
 }
 
-/* ===========================
-   Desktop navigation fix
-=========================== */
+/* LOGOUT */
+.nav-logout { color: #f87171; }
+
+/* RESPONSIVE MOBILE / TABLETTE */
+@media (max-width: 768px) {
+  .burger { display: flex; }
+
+  /* Logo réduit à moitié de la taille desktop */
+  .logo {
+    font-size: 0.75rem; /* moitié de 1.5rem */
+    margin-left: 0; /* toujours bien aligné */
+  }
+
+  .nav-links {
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 260px;
+    padding: 4.5rem 1rem 2rem;
+    gap: 1rem;
+    background-color: #2e3a55;
+    transform: translateX(100%);
+    transition: transform 0.4s ease;
+    border-left: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px 0 0 8px;
+    overflow-y: auto;
+    z-index: 1200;
+  }
+
+  .nav-links.open { transform: translateX(0); }
+
+  .close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    background: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .nav-links a,
+  .nav-links button {
+    width: 100%;
+    text-align: left;
+    font-size: 1rem;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .admin-badge { align-self: flex-start; }
+}
+
+/* DESKTOP */
 @media (min-width: 769px) {
+  .close-btn { display: none; }
+
   .nav-links {
     position: static;
     transform: none;
     height: auto;
     width: auto;
     flex-direction: row;
-    background: transparent;
-    padding: 0;
-    gap: 1rem;
-    border: none;
-    overflow: visible;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    align-items: center;
   }
 
   .nav-links a,
-  .nav-links button {
-    opacity: 1;
-    transform: none;
-    width: auto;
-    text-align: left;
-  }
+  .nav-links button { width: auto; text-align: left; padding: 0.35rem 0.6rem; }
 }

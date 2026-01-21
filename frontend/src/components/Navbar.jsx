@@ -37,35 +37,34 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Overlay pour fermer le menu */}
       {isMenuOpen && <div className="nav-overlay" onClick={closeMenu} />}
 
       <nav className="navbar">
         <Link to="/" className="logo" onClick={closeMenu}>
-          Student Events
+          StudEvents
         </Link>
 
-        {/* Burger menu */}
         <div className={`burger ${isMenuOpen ? 'open' : ''}`} onClick={toggleMenu}>
-          <div className="line" />
-          <div className="line" />
-          <div className="line" />
+          <span />
+          <span />
+          <span />
+          <span className="burger-label">Menu</span>
         </div>
 
-        {/* Menu liens */}
         <div className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
-          <Link to="/events" onClick={closeMenu}>Événements</Link>
+          <button className="close-btn" onClick={closeMenu} aria-label="Fermer le menu">
+            ✕
+          </button>
+
+          <Link to="/" onClick={closeMenu}>Accueil</Link>
+          <Link to="/events" onClick={closeMenu} className="nav-highlight">Événements</Link>
           <Link to="/registrations" onClick={closeMenu}>Inscrits</Link>
 
           {!token && (
             <>
               <Link to="/login" onClick={closeMenu}>Connexion</Link>
-              {userExists && (
-                <Link to="/register" onClick={closeMenu}>S'inscrire</Link>
-              )}
-              <Link to="/admin-login" className="nav-btn secondary" onClick={closeMenu}>
-                Admin
-              </Link>
+              {userExists && <Link to="/register" onClick={closeMenu}>S'inscrire</Link>}
+              <Link to="/admin-login" onClick={closeMenu} className="nav-admin">Admin</Link>
             </>
           )}
 
@@ -77,12 +76,12 @@ export default function Navbar() {
             </>
           )}
 
-          <Link to="/add-event" className="nav-btn" onClick={closeMenu}>
-            Ajouter un événement
+          <Link to="/add-event" className="nav-cta" onClick={closeMenu}>
+            + Ajouter un événement
           </Link>
 
           {token && (
-            <button className="nav-btn logout" onClick={handleLogout}>
+            <button className="nav-logout" onClick={handleLogout}>
               Déconnexion
             </button>
           )}
