@@ -1,39 +1,158 @@
+/* ===========================
+   Conteneur principal
+=========================== */
 .profile-container {
   max-width: 500px;
-  margin: 2rem auto;
-  padding: 2rem;
+  margin: 3rem auto; /* centré et espacé du menu */
+  padding: clamp(1.5rem, 4vw, 2.5rem);
   background: white;
-  border-radius: 1rem;
+  border-radius: 1.5rem;
   text-align: center;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  box-shadow: 0 15px 30px rgba(107, 92, 255, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+/* Titre principal */
+.profile-container h1 {
+  font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+  font-weight: 800;
+  color: #3b82f6;
+  margin-bottom: 1.5rem;
+}
+
+/* Avatar */
 .profile-avatar {
   width: 140px;
   height: 140px;
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid #ddd;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
   background-color: #f0f0f0;
 }
 
+/* Bouton upload avatar */
 .upload-btn {
   display: inline-block;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   padding: 0.5rem 1.5rem;
-  background-color: #3b82f6;
+  background: linear-gradient(135deg, #6b5cff, #8f84ff);
   color: white;
   border-radius: 9999px;
   cursor: pointer;
   font-weight: bold;
+  transition: all 0.3s ease;
 }
 
 .upload-btn:hover {
-  background-color: #2563eb;
+  background: linear-gradient(135deg, #2563eb, #6b5cff);
 }
 
+/* Infos utilisateur */
 .profile-info p {
   margin: 0.5rem 0;
   color: #374151;
+  font-weight: 500;
+}
+
+/* Bouton changer mot de passe */
+.toggle-password-btn {
+  margin-top: 1rem;
+  padding: 0.5rem 1.5rem;
+  background: #fbbf24;
+  color: white;
+  font-weight: bold;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.toggle-password-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Formulaire mot de passe */
+.password-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.password-form input {
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+}
+
+.password-form button {
+  padding: 0.75rem 1rem;
+  background: #3b82f6;
+  color: white;
+  font-weight: bold;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.password-form button:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Message de succès */
+.success-msg {
+  color: #10b981;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+/* ===========================
+   Responsive
+=========================== */
+@media (max-width: 1024px) {
+  .profile-container {
+    max-width: 450px;
+    margin: 2.5rem auto;
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-container {
+    max-width: 90%;
+    margin: 2rem auto;
+    padding: 1.5rem;
+  }
+
+  .toggle-password-btn,
+  .upload-btn,
+  .password-form button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-container {
+    padding: 1rem;
+    margin: 1.5rem auto;
+  }
+
+  .profile-container h1 {
+    font-size: 1.8rem;
+  }
+
+  .profile-avatar {
+    width: 120px;
+    height: 120px;
+  }
+
+  .password-form input {
+    font-size: 0.95rem;
+  }
 }

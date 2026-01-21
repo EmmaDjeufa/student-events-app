@@ -26,16 +26,20 @@ export default function Dashboard() {
     <div className="dashboard">
       <h1>Événements existants</h1>
 
+      <button className="add-event-btn" onClick={() => navigate('/add-event')}>
+        + Ajouter un événement
+      </button>
+
       <div className="events-list">
         {events.map(event => (
-          // On utilise EventCard ici pour chaque événement
           <EventCard
             key={event.id}
             event={event}
-            onDelete={handleDelete} // bouton supprimer
+            onDelete={handleDelete}
           />
         ))}
       </div>
     </div>
+
   )
 }

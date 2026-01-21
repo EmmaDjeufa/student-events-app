@@ -17,10 +17,12 @@ student-events-app/
 │  ├─ .env
 │  ├─ config/
 │  │  ├─ db.js
+|  |  ├─ cloudinary.js
 │  │  └─ upload.js
 │  ├─ middleware/
 │  │  ├─ auth.js
 │  │  ├─ admin.js
+|  |  ├─ upload.js
 │  │  └─ errorHandler.js
 │  ├─ controllers/
 │  │  ├─ authController.js
@@ -81,6 +83,7 @@ student-events-app/
 │     │  ├─ Login.css
 │     │  ├─ Register.css
 │     │  ├─ Events.css
+|     |  ├─ AddEvent.css
 │     │  ├─ EventDetail.css
 │     │  ├─ Dashboard.css
 │     │  ├─ Registrations.css

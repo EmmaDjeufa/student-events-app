@@ -1,8 +1,8 @@
-// src/pages/AddEvent.jsx
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import EventForm from '../components/EventForm'
 import { apiRequest } from '../api/api'
+import './css/AddEvent.css' // <-- import CSS
 
 export default function AddEvent() {
   const navigate = useNavigate()
@@ -17,8 +17,10 @@ export default function AddEvent() {
   }, [token, navigate])
 
   return (
-    <div className="p-6 max-w-md mx-auto">
-      <EventForm onSuccess={() => navigate('/dashboard')} />
+    <div className="add-event-page">
+      <div className="add-event-container">
+        <EventForm onSuccess={() => navigate('/dashboard')} />
+      </div>
     </div>
   )
 }

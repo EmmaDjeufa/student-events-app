@@ -72,10 +72,7 @@ export default function Profile() {
     <div className="profile-container">
       <h1>Mon profil</h1>
 
-      <img
-        src={user.avatar || '/default-avatar.png'}
-        className="profile-avatar"
-      />
+      <img src={user.avatar || '/default-avatar.png'} className="profile-avatar" />
 
       <label className="upload-btn">
         Modifier la photo
@@ -89,7 +86,10 @@ export default function Profile() {
         <p><strong>Inscrit le :</strong> {new Date(user.created_at).toLocaleDateString()}</p>
       </div>
 
-      <button className="toggle-password-btn" onClick={() => setShowPasswordForm(!showPasswordForm)}>
+      <button
+        className="toggle-password-btn"
+        onClick={() => setShowPasswordForm(!showPasswordForm)}
+      >
         {showPasswordForm ? 'Annuler changement mot de passe' : 'Changer le mot de passe'}
       </button>
 
@@ -115,5 +115,6 @@ export default function Profile() {
 
       {success && <p className="success-msg">{success}</p>}
     </div>
+
   )
 }

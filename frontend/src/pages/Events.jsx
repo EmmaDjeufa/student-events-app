@@ -5,8 +5,8 @@ import './css/Events.css'
 
 function Events() {
   const [events, setEvents] = useState([])
-  const [loading, setLoading] = useState(true) // état pour le chargement
-  const [error, setError] = useState(null) // pour gérer les erreurs
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
   const navigate = useNavigate()
 
   useEffect(() => {

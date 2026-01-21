@@ -1,0 +1,74 @@
+/* ===========================
+   Page Add Event
+=========================== */
+.add-event-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center; /* centre horizontalement */
+  align-items: flex-start; /* commence sous la navbar */
+  padding: 2rem;
+  background: linear-gradient(135deg, #f6f8ff, #eef1ff, #6b5cff);
+}
+
+/* Conteneur du formulaire */
+.add-event-container {
+  background: white;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border-radius: 1.5rem;
+  box-shadow: 0 15px 30px rgba(107, 92, 255, 0.15);
+  width: 100%;
+  max-width: 600px; /* limite la largeur sur grand écran */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Titre du formulaire si EventForm contient un h1 ou titre */
+.add-event-container h1 {
+  font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+  font-weight: 800;
+  color: #3b82f6;
+  margin-bottom: 1.5rem;
+}
+
+/* ===========================
+   Responsive
+=========================== */
+@media (max-width: 1024px) {
+  .add-event-page {
+    padding: 1.5rem;
+  }
+
+  .add-event-container {
+    max-width: 90%;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .add-event-page {
+    padding: 1rem;
+  }
+
+  .add-event-container {
+    width: 100%;
+    padding: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .add-event-page {
+    padding: 0.8rem;
+  }
+
+  .add-event-container {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+
+  .add-event-container h1 {
+    font-size: 1.5rem;
+  }
+}

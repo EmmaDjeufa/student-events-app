@@ -1,50 +1,111 @@
-.auth-form {
-  max-width: 400px;
-  margin: 4rem auto;
-  background: white;
-  padding: 2rem;
-  border-radius: 1rem;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+/* ===============================
+   PAGE AUTHENTIFICATION
+================================ */
+.auth-page {
+  display: flex;
+  justify-content: flex-start; /* commence juste sous le menu */
+  align-items: flex-start;     /* permet au formulaire de ne pas être centré verticalement */
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f6f8ff, #eef1ff);
+  padding: clamp(1rem, 3vw, 2rem); /* réduit l’espace haut */
+  padding-top: calc(var(--navbar-height, 56px) + 1rem); /* espace juste sous la navbar */
 }
 
+/* ===============================
+   FORMULAIRE
+================================ */
+.auth-form {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  padding: clamp(2rem, 4vw, 3rem);
+  border-radius: 1.5rem;
+  box-shadow: 0 15px 30px rgba(107, 92, 255, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto; /* centre horizontalement */
+}
+
+
+/* TITRE */
 .auth-form h1 {
-  font-size: 2rem;
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
   font-weight: 800;
-  color: #3b82f6;
+  color: #6b5cff;
   margin-bottom: 1.5rem;
   text-align: center;
 }
 
+/* INPUTS */
 .auth-form input {
   width: 100%;
   padding: 0.75rem 1rem;
   margin-bottom: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   border: 2px solid #d1d5db;
   outline: none;
+  font-size: 1rem;
 }
 
 .auth-form input:focus {
-  border-color: #3b82f6;
+  border-color: #6b5cff;
+  box-shadow: 0 0 8px rgba(107, 92, 255, 0.3);
 }
 
+/* BOUTON */
 .auth-form button {
   width: 100%;
-  background-color: #10b981;
+  background: linear-gradient(135deg, #6b5cff, #8f84ff);
   color: white;
-  font-weight: bold;
+  font-weight: 600;
   padding: 0.75rem 1rem;
   border-radius: 9999px;
+  border: none;
+  cursor: pointer;
   transition: all 0.3s ease;
+  font-size: 1rem;
 }
 
 .auth-form button:hover {
   transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 25px rgba(107, 92, 255, 0.25);
 }
 
+/* MESSAGE D'ERREUR */
 .error {
-  color: red;
+  color: #ef4444;
   margin-bottom: 0.5rem;
   text-align: center;
+  font-weight: 500;
+  width: 100%;
+}
+
+/* RESPONSIVE TABLETTE ET MOBILE */
+@media (max-width: 768px) {
+  .auth-form {
+    max-width: 350px;
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-form {
+    max-width: 90%;
+    padding: 1.5rem;
+  }
+
+  .auth-form h1 {
+    font-size: 1.8rem;
+  }
+
+  .auth-form input {
+    font-size: 0.95rem;
+    padding: 0.7rem 0.9rem;
+  }
+
+  .auth-form button {
+    font-size: 0.95rem;
+    padding: 0.7rem 0.9rem;
+  }
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { apiRequest } from '../api/api'
 import { useNavigate } from 'react-router-dom'
-import '../index.css'
+import './css/Auth.css'
 
 function Login() {
   const [email, setEmail] = useState('')
@@ -18,7 +18,6 @@ function Login() {
       
       if (data.token) {
         localStorage.setItem('token', data.token)
-        // Redirection vers la liste des événements, pas le formulaire d'ajout
         navigate('/events')
       }
 
@@ -28,28 +27,28 @@ function Login() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="form-container">
-      <h1 className="title">Connexion</h1>
-      {error && <p className="text-red">{error}</p>}
+    <div className="auth-page">
+      <form onSubmit={handleSubmit} className="auth-form animate-fadeIn">
+        <h1>Connexion</h1>
+        {error && <p className="auth-error">{error}</p>}
 
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-        className="border p-2 w-full mb-4"
-      />
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+        />
 
-      <input
-        type="password"
-        placeholder="Mot de passe"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-        className="border p-2 w-full mb-4"
-      />
+        <input
+          type="password"
+          placeholder="Mot de passe"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        />
 
-      <button type="submit" className="btn btn-primary w-full">Connexion</button>
-    </form>
+        <button type="submit">Connexion</button>
+      </form>
+    </div>
   )
 }
 

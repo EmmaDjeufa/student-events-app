@@ -32,9 +32,10 @@ function Registrations() {
       )}
 
       {loading ? (
-        <p>Chargement des utilisateurs...</p>
+        <p className="loading-text">Chargement des utilisateurs...</p>
       ) : (
         <div className="registrations-grid">
+          {users.length === 0 && <p>Aucun utilisateur pour le moment.</p>}
           {users.map(user => (
             <div key={user.id} className="registration-card">
               <p>
@@ -62,4 +63,3 @@ function Registrations() {
 }
 
 export default Registrations
-
