@@ -1,11 +1,11 @@
 
-# Student Events App 🚀
+# Student Events App 🚀 en cours ...
 
 A full-stack web application for managing student events, registrations, and user profiles.  
 Administrators can create, edit, and delete events, while students can view events and register.
 
 ## Live Demo
-[Your Live App URL here]
+[https://student-events-app-2.onrender.com]
 
 ---
 
