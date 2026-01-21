@@ -123,3 +123,29 @@
 @media (max-width: 768px) {
   .burger { display: flex; }
 }
+
+/* ===========================
+   Desktop navigation fix
+=========================== */
+@media (min-width: 769px) {
+  .nav-links {
+    position: static;
+    transform: none;
+    height: auto;
+    width: auto;
+    flex-direction: row;
+    background: transparent;
+    padding: 0;
+    gap: 1rem;
+    border: none;
+    overflow: visible;
+  }
+
+  .nav-links a,
+  .nav-links button {
+    opacity: 1;
+    transform: none;
+    width: auto;
+    text-align: left;
+  }
+}
