@@ -34,20 +34,35 @@ function EventDetail() {
     alert(`Pour vous inscrire, contactez l'admin : ${event.admin_email}`)
   }
 
-  return (
+ return (
     <div className="event-detail-container">
       <h1>{event.title}</h1>
 
       <p className="event-date">{event.date}</p>
 
-      {/* ✅ Description visible UNIQUEMENT ici */}
       <p className="event-description">{event.description}</p>
+
+      {/* Email admin visible seulement si connecté */}
+      {token ? (
+        <p className="admin-contact">
+          Contacter l'organisateur :{" "}
+          <a href={`mailto:${event.admin_email}`}>
+            {event.admin_email}
+          </a>
+        </p>
+      ) : (
+        <p className="admin-warning">
+          🔒 Connectez-vous pour voir l'email de l'organisateur.
+        </p>
+      )}
 
       <button className="btn-primary" onClick={handleRegister}>
         S'inscrire
       </button>
     </div>
   )
+
+
 }
 
 export default EventDetail
