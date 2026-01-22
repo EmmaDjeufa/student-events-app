@@ -61,14 +61,11 @@ function Registrations() {
           {filtered.map(user => (
             <div key={user.id} className="registration-card">
               <img
-                  src={
-                      user.avatar
-                        ? `${import.meta.env.VITE_BACKEND_URL}/uploads/avatars/${user.avatar}`
-                        : '/default-avatar.png'
-                    }
-                    alt={user.user_name}
-                    className="registration-avatar"
-                  />
+                src={user.avatar ? user.avatar : '/default-avatar.png'}
+                alt={user.user_name}
+                className="registration-avatar"
+              />
+
 
 
               <p><strong>Nom :</strong> {user.user_name}</p>
