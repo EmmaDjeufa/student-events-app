@@ -1,3 +1,4 @@
+const pool = require('../config/db')
 const Event = require('../models/Event')
 
 exports.getAllEvents = async (req, res) => {
