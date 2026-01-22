@@ -1,36 +1,51 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { apiRequest } from '../api/api'
 import './css/EventDetail.css'
 
 function EventDetail() {
   const { id } = useParams()
+  const navigate = useNavigate()
   const [event, setEvent] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  const token = localStorage.getItem('token')
 
   useEffect(() => {
-    async function loadEvent() {
-      try {
-        const data = await apiRequest(`/events/${id}`)
-        setEvent(data)
-      } catch (err) {
-        console.error('Erreur récupération événement :', err)
-      } finally {
-        setLoading(false)
-      }
-    }
-    loadEvent()
+    apiRequest(`/events/${id}`)
+      .then(data => setEvent(data))
+      .catch(err => {
+        console.error(err)
+        setError("Impossible de charger l'événement.")
+      })
   }, [id])
 
-  if (loading) return <p>Chargement...</p>
-  if (!event) return <p>Événement introuvable.</p>
+  if (error) return <p className="error-text">{error}</p>
+  if (!event) return <p>Chargement...</p>
+
+  const handleRegister = () => {
+    if (!token) {
+      alert("Vous devez être connecté pour vous inscrire.")
+      navigate('/login')
+      return
+    }
+
+    // Ici on n'inscrit PAS directement
+    alert(`Pour vous inscrire, contactez l'admin : ${event.admin_email}`)
+  }
 
   return (
-    <div className="event-detail">
+    <div className="event-detail-container">
       <h1>{event.title}</h1>
-      <p>{event.description}</p>
-      <p>Date : {event.date}</p>
-      <button>Inscription</button>
+
+      <p className="event-date">{event.date}</p>
+
+      {/* ✅ Description visible UNIQUEMENT ici */}
+      <p className="event-description">{event.description}</p>
+
+      <button className="btn-primary" onClick={handleRegister}>
+        S'inscrire
+      </button>
     </div>
   )
 }
