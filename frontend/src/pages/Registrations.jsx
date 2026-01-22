@@ -7,7 +7,9 @@ function Registrations() {
   const [filtered, setFiltered] = useState([])
   const [search, setSearch] = useState('')
   const [loading, setLoading] = useState(true)
+
   const token = localStorage.getItem('token')
+  const role = localStorage.getItem('role') // role de l'utilisateur connecté
 
   useEffect(() => {
     async function loadUsers() {
@@ -39,11 +41,10 @@ function Registrations() {
 
       {!token && (
         <p className="notice">
-          Pour rejoindre ces événements et la communauté, veuillez créer un compte ou vous connecter !
+          Connectez-vous pour voir les informations complètes des utilisateurs !
         </p>
       )}
 
-      {/* Barre de recherche */}
       <input
         type="text"
         placeholder="Rechercher un utilisateur..."
@@ -59,12 +60,18 @@ function Registrations() {
           {filtered.length === 0 && <p>Aucun utilisateur trouvé.</p>}
           {filtered.map(user => (
             <div key={user.id} className="registration-card">
-              <p>
-                <strong>Nom :</strong> {user.user_name}{' '}
-                {user.user_role === 'admin' && (
-                  <span className="admin-badge">ADMIN</span>
-                )}
-              </p>
+              <img
+                  src={
+                      user.avatar
+                        ? `${import.meta.env.VITE_BACKEND_URL}/uploads/avatars/${user.avatar}`
+                        : '/default-avatar.png'
+                    }
+                    alt={user.user_name}
+                    className="registration-avatar"
+                  />
+
+
+              <p><strong>Nom :</strong> {user.user_name}</p>
 
               {token ? (
                 <p>
@@ -79,14 +86,17 @@ function Registrations() {
                 </p>
               )}
 
-              <p><strong>Rôle :</strong> {user.user_role}</p>
-
-              <p>
-                <strong>Événements :</strong>{' '}
-                {user.events && user.events.length > 0
-                  ? user.events.join(', ')
-                  : 'Aucun'}
-              </p>
+              {role === 'admin' && (
+                <>
+                  <p><strong>Rôle :</strong> {user.user_role.toUpperCase()}</p>
+                  <p>
+                    <strong>Événements :</strong>{' '}
+                    {user.events && user.events.length > 0
+                      ? user.events.join(', ')
+                      : 'Aucun'}
+                  </p>
+                </>
+              )}
             </div>
           ))}
         </div>
@@ -96,3 +106,4 @@ function Registrations() {
 }
 
 export default Registrations
+
