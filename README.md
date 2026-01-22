@@ -13,7 +13,7 @@ Administrators can create, edit, and delete events, while students can view even
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/YourUsername/student-events-app.git
+git clone https://github.com/EmmaDjeufa/student-events-app
 cd student-events-app
 ````
 
