@@ -4,6 +4,8 @@ import './css/Registrations.css'
 
 function Registrations() {
   const [users, setUsers] = useState([])
+  const [filtered, setFiltered] = useState([])
+  const [search, setSearch] = useState('')
   const [loading, setLoading] = useState(true)
   const token = localStorage.getItem('token')
 
@@ -12,6 +14,7 @@ function Registrations() {
       try {
         const data = await apiRequest('/registrations/public')
         setUsers(data)
+        setFiltered(data)
       } catch (err) {
         console.error('Erreur récupération des utilisateurs:', err)
       } finally {
@@ -20,6 +23,15 @@ function Registrations() {
     }
     loadUsers()
   }, [])
+
+  // 🔎 Filtrage alphabétique
+  useEffect(() => {
+    const f = users.filter(user =>
+      user.user_name.toLowerCase().includes(search.toLowerCase()) ||
+      user.user_email.toLowerCase().includes(search.toLowerCase())
+    )
+    setFiltered(f)
+  }, [search, users])
 
   return (
     <div className="registrations-page">
@@ -31,12 +43,21 @@ function Registrations() {
         </p>
       )}
 
+      {/* Barre de recherche */}
+      <input
+        type="text"
+        placeholder="Rechercher un utilisateur..."
+        value={search}
+        onChange={e => setSearch(e.target.value)}
+        className="registrations-search"
+      />
+
       {loading ? (
         <p className="loading-text">Chargement des utilisateurs...</p>
       ) : (
         <div className="registrations-grid">
-          {users.length === 0 && <p>Aucun utilisateur pour le moment.</p>}
-          {users.map(user => (
+          {filtered.length === 0 && <p>Aucun utilisateur trouvé.</p>}
+          {filtered.map(user => (
             <div key={user.id} className="registration-card">
               <p>
                 <strong>Nom :</strong> {user.user_name}{' '}
@@ -45,7 +66,19 @@ function Registrations() {
                 )}
               </p>
 
-              <p><strong>Email :</strong> {user.user_email}</p>
+              {token ? (
+                <p>
+                  <strong>Email :</strong>{' '}
+                  <a href={`mailto:${user.user_email}`} className="email-link">
+                    {user.user_email}
+                  </a>
+                </p>
+              ) : (
+                <p>
+                  <strong>Email :</strong> Connectez-vous pour voir l’email
+                </p>
+              )}
+
               <p><strong>Rôle :</strong> {user.user_role}</p>
 
               <p>

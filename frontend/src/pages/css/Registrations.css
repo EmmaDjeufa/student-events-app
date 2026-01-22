@@ -1,13 +1,15 @@
-/* CONTENEUR PRINCIPAL */
+/* ===========================
+   CONTENEUR PRINCIPAL
+=========================== */
 .registrations-page {
   padding: clamp(1rem, 3vw, 3rem);
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center; /* centre horizontalement */
+  align-items: center;
   text-align: center;
-  background: #f6f8ff; /* couleur cohérente avec la page d'accueil */
+  background: #f6f8ff;
   min-height: 100vh;
 }
 
@@ -15,14 +17,14 @@
 .registrations-page h1 {
   font-size: clamp(2rem, 4vw, 2.5rem);
   font-weight: 800;
-  color: #6b5cff; /* couleur thème page d'accueil */
+  color: #6b5cff;
   margin-bottom: 1.5rem;
 }
 
 /* NOTICE POUR NON CONNECTÉS */
 .notice {
   text-align: center;
-  color: #fbbf24; /* doré/orange pour attirer l'attention */
+  color: #fbbf24;
   margin-bottom: 1rem;
   font-weight: 500;
 }
@@ -32,6 +34,33 @@
   font-size: 1.1rem;
   color: #6b5cff;
   margin-top: 1rem;
+}
+
+/* BARRE DE RECHERCHE */
+.registrations-search {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.6rem 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 9999px;
+  border: 1.5px solid #6b5cff;
+  font-size: 1rem;
+  outline: none;
+  text-align: center;
+  background: #f5f7ff;
+  color: #1b1b2f;
+  transition: all 0.3s ease;
+}
+
+.registrations-search::placeholder {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.registrations-search:focus {
+  border-color: #8f84ff;
+  box-shadow: 0 0 0 3px rgba(107, 92, 255, 0.25);
+  background: #ffffff;
 }
 
 /* GRILLE DE REGISTRATIONS */
@@ -45,7 +74,7 @@
 
 /* CARTE DE REGISTRATION */
 .registration-card {
-  background: #eef1ff; /* gradient léger comme la home */
+  background: #eef1ff;
   border-radius: 1.5rem;
   padding: 1.5rem;
   box-shadow: 0 10px 20px rgba(107, 92, 255, 0.15);
@@ -80,6 +109,17 @@
   font-size: 0.75rem;
 }
 
+/* LIEN EMAIL */
+.email-link {
+  color: #3b82f6;
+  text-decoration: underline;
+  transition: all 0.3s ease;
+}
+
+.email-link:hover {
+  color: #6b5cff;
+}
+
 /* RESPONSIVE TABLETTE ET MOBILE */
 @media (max-width: 1024px) {
   .registrations-page {
@@ -105,6 +145,13 @@
   .notice {
     font-size: 0.95rem;
   }
+
+  .registrations-search {
+    max-width: 90%;
+    font-size: 0.95rem;
+    padding: 0.5rem 0.9rem;
+    margin-bottom: 1.5rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -116,7 +163,14 @@
     padding: 0.8rem;
   }
 
-  .registration-page h1 {
+  .registrations-page h1 {
     font-size: 1.5rem;
+  }
+
+  .registrations-search {
+    max-width: 95%;
+    font-size: 0.9rem;
+    padding: 0.45rem 0.8rem;
+    margin-bottom: 1rem;
   }
 }

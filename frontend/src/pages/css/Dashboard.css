@@ -2,12 +2,13 @@
    Conteneur principal
 =========================== */
 .dashboard {
-  max-width: 1200px; /* limite sur grands écrans */
-  margin: 3rem auto; /* centré et espacé du menu */
+  max-width: 1200px;
+  margin: 3rem auto;
   padding: clamp(1.5rem, 4vw, 2.5rem);
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 /* Titre principal */
@@ -16,7 +17,33 @@
   font-weight: 800;
   color: #3b82f6;
   margin-bottom: 2rem;
+}
+
+/* Barre de recherche */
+.dashboard-search {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.6rem 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 9999px;
+  border: 1.5px solid #6b5cff;
+  font-size: 1rem;
+  outline: none;
   text-align: center;
+  background: #f5f7ff;
+  color: #1b1b2f;
+  transition: all 0.3s ease;
+}
+
+.dashboard-search::placeholder {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.dashboard-search:focus {
+  border-color: #8f84ff;
+  box-shadow: 0 0 0 3px rgba(107, 92, 255, 0.25);
+  background: #ffffff;
 }
 
 /* Bouton ajouter un événement */
@@ -24,14 +51,13 @@
   background: linear-gradient(135deg, #6b5cff, #8f84ff);
   color: white;
   font-weight: bold;
-  padding: 0.5rem 1.5rem; /* réduit le padding pour un bouton plus petit */
-  font-size: 0.9rem; /* taille du texte légèrement plus petite */
+  padding: 0.5rem 1.5rem;
+  font-size: 0.9rem;
   border-radius: 9999px;
   transition: all 0.3s ease;
   cursor: pointer;
   margin-bottom: 2rem;
 }
-
 
 .add-event-btn:hover {
   transform: translateY(-3px) scale(1.05);
@@ -47,7 +73,14 @@
   justify-items: center;
 }
 
-/* ===========================
+/* Texte "Aucun événement" */
+.no-events {
+  color: #6b5cff;
+  font-weight: 600;
+  margin-top: 2rem;
+}
+
+/* =========================
    Responsive
 =========================== */
 @media (max-width: 1024px) {
@@ -66,6 +99,13 @@
     width: 100%;
     text-align: center;
   }
+
+  .dashboard-search {
+    max-width: 90%;
+    font-size: 0.95rem;
+    padding: 0.5rem 0.9rem;
+    margin-bottom: 1.5rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -80,5 +120,12 @@
 
   .events-list {
     gap: 1rem;
+  }
+
+  .dashboard-search {
+    max-width: 95%;
+    font-size: 0.9rem;
+    padding: 0.45rem 0.8rem;
+    margin-bottom: 1rem;
   }
 }
