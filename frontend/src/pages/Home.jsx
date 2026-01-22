@@ -17,7 +17,7 @@ export default function Home() {
           </h1>
 
           <p className="home-subtitle">
-            Découvrez, créez et participez aux meilleurs événements étudiants autour de vous.
+            Découvrez, créez et participez aux meilleurs événements étudiants de notre groupe de classe.
           </p>
 
           <div className="home-actions">

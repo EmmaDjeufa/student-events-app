@@ -25,6 +25,16 @@ function AuthRoute({ children }) {
   return token ? <Navigate to="/dashboard" replace /> : children
 }
 
+function AdminRoute({ children }) {
+  const token = localStorage.getItem('token')
+  const role = localStorage.getItem('role')
+
+  if (!token) return <Navigate to="/login" replace />
+  if (role !== 'admin') return <Navigate to="/" replace />
+
+  return children
+}
+
 function App() {
   return (
     <>
@@ -61,11 +71,12 @@ function App() {
           <Route
             path="/dashboard"
             element={
-              <ProtectedRoute>
+              <AdminRoute>
                 <Dashboard />
-              </ProtectedRoute>
+              </AdminRoute>
             }
           />
+
           <Route
             path="/profile"
             element={
@@ -77,9 +88,9 @@ function App() {
           <Route
             path="/add-event"
             element={
-              <ProtectedRoute>
+              <AdminRoute>
                 <AddEvent />
-              </ProtectedRoute>
+              </AdminRoute>
             }
           />
           <Route

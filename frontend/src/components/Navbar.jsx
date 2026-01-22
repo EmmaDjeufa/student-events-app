@@ -68,17 +68,25 @@ export default function Navbar() {
             </>
           )}
 
-          {token && (
+         {token && (
             <>
               <Link to="/profile" onClick={closeMenu}>Profil</Link>
-              <Link to="/dashboard" onClick={closeMenu}>Dashboard</Link>
-              {role === 'admin' && <span className="admin-badge">ADMIN</span>}
+
+              {role === 'admin' && (
+                <>
+                  <Link to="/dashboard" onClick={closeMenu}>Dashboard</Link>
+                  <span className="admin-badge">ADMIN</span>
+                </>
+              )}
             </>
           )}
 
-          <Link to="/add-event" className="nav-cta" onClick={closeMenu}>
-            + Ajouter un événement
-          </Link>
+
+          {token && role === 'admin' && (
+            <Link to="/add-event" className="nav-cta" onClick={closeMenu}>
+              + Ajouter un événement
+            </Link>
+          )}
 
           {token && (
             <button className="nav-logout" onClick={handleLogout}>
