@@ -61,7 +61,7 @@ exports.createEvent = async (req, res) => {
     const result = await pool.query(
       `
       INSERT INTO events (title, description, date,time, location, created_by)
-      VALUES ($1, $2, $3, $4, $5)
+      VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING *
       `,
       [title, description, date, time, location, req.user.id]
@@ -83,7 +83,7 @@ exports.updateEvent = async (req, res) => {
           description = $2,
           date = $3,
           time = $4,
-          location = $4
+          location = $5
       WHERE id = $5
       RETURNING *
       `,
