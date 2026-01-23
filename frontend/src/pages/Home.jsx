@@ -2,11 +2,14 @@ import { useState, useEffect } from "react";
 import { apiRequest } from "../api/api"; // pour récupérer les admins
 import "./css/Home.css";
 import heroImage from "../assets/party-illustration.jpg";
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from "react-router-dom"
 
 export default function Home() {
   const [showAdminModal, setShowAdminModal] = useState(false);
   const [admins, setAdmins] = useState([]);
+  const goToEvents = () => {
+    navigate("/events");
+  };
 
   // Récupération des admins
   useEffect(() => {
@@ -35,10 +38,9 @@ export default function Home() {
           </p>
 
           <div className="home-actions">
-            <button
-              className="home-btn primary"
-              to="/events" 
-            >
+            
+
+             <button className="home-btn primary" onClick={goToEvents}>
               Explorer les événements
             </button>
 
