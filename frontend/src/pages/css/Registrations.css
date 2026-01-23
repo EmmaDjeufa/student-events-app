@@ -1,6 +1,3 @@
-/* ===========================
-   Conteneur principal
-=========================== */
 .registrations-page {
   padding: clamp(1rem, 3vw, 3rem);
   max-width: 1200px;
@@ -13,7 +10,6 @@
   min-height: 100vh;
 }
 
-/* TITRE */
 .registrations-page h1 {
   font-size: clamp(2rem, 4vw, 2.5rem);
   font-weight: 800;
@@ -21,7 +17,6 @@
   margin-bottom: 1.5rem;
 }
 
-/* NOTICE POUR NON CONNECTÉS */
 .notice {
   text-align: center;
   color: #fbbf24;
@@ -29,14 +24,12 @@
   font-weight: 500;
 }
 
-/* TEXTE CHARGEMENT */
 .loading-text {
   font-size: 1.1rem;
   color: #6b5cff;
   margin-top: 1rem;
 }
 
-/* BARRE DE RECHERCHE */
 .registrations-search {
   width: 100%;
   max-width: 400px;
@@ -63,7 +56,6 @@
   background: #ffffff;
 }
 
-/* GRILLE DE REGISTRATIONS */
 .registrations-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -72,7 +64,6 @@
   justify-items: center;
 }
 
-/* CARTE DE REGISTRATION */
 .registration-card {
   background: #eef1ff;
   border-radius: 1.5rem;
@@ -87,30 +78,25 @@
   text-align: center;
 }
 
-/* HOVER */
 .registration-card:hover {
   transform: translateY(-4px) scale(1.02);
   box-shadow: 0 15px 30px rgba(107, 92, 255, 0.25);
 }
 
-/* AVATAR */
-.registration-avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 1rem;
-  border: 2px solid #6b5cff;
-  background-color: #f0f0f0;
-}
-
-/* TEXTE DANS LA CARTE */
 .registration-card p {
   margin-bottom: 0.5rem;
   color: #1b1b2f;
 }
 
-/* BADGE ADMIN */
+.registration-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 0.75rem;
+  border: 2px solid #ddd;
+}
+
 .admin-badge {
   background-color: #facc15;
   color: #000;
@@ -121,7 +107,6 @@
   font-size: 0.75rem;
 }
 
-/* LIEN EMAIL */
 .email-link {
   color: #3b82f6;
   text-decoration: underline;
@@ -130,15 +115,6 @@
 
 .email-link:hover {
   color: #6b5cff;
-}
-
-/* ===========================
-   Responsive
-=========================== */
-@media (max-width: 1024px) {
-  .registrations-page {
-    padding: 2rem 1rem;
-  }
 }
 
 @media (max-width: 768px) {
@@ -152,39 +128,9 @@
     padding: 1rem;
   }
 
-  .registrations-page h1 {
-    font-size: clamp(1.5rem, 5vw, 2rem);
-  }
-
-  .notice {
-    font-size: 0.95rem;
-  }
-
   .registrations-search {
     max-width: 90%;
     font-size: 0.95rem;
     padding: 0.5rem 0.9rem;
-    margin-bottom: 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .registrations-page {
-    padding: 1rem;
-  }
-
-  .registration-card {
-    padding: 0.8rem;
-  }
-
-  .registrations-page h1 {
-    font-size: 1.5rem;
-  }
-
-  .registrations-search {
-    max-width: 95%;
-    font-size: 0.9rem;
-    padding: 0.45rem 0.8rem;
-    margin-bottom: 1rem;
   }
 }

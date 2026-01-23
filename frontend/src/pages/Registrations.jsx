@@ -9,12 +9,13 @@ function Registrations() {
   const [loading, setLoading] = useState(true)
 
   const token = localStorage.getItem('token')
-  const role = localStorage.getItem('role') // role de l'utilisateur connecté
+  const role = localStorage.getItem('role') // rôle de l'utilisateur connecté
 
   useEffect(() => {
     async function loadUsers() {
       try {
         const data = await apiRequest('/registrations/public')
+        console.log('USERS FROM API:', data)   // 👈 IMPORTANT
         setUsers(data)
         setFiltered(data)
       } catch (err) {
@@ -25,6 +26,7 @@ function Registrations() {
     }
     loadUsers()
   }, [])
+
 
   // 🔎 Filtrage alphabétique
   useEffect(() => {
@@ -61,12 +63,10 @@ function Registrations() {
           {filtered.map(user => (
             <div key={user.id} className="registration-card">
               <img
-                src={user.avatar ? user.avatar : '/default-avatar.png'}
+                src={user.avatar || '/default-avatar.png'}
                 alt={user.user_name}
                 className="registration-avatar"
               />
-
-
 
               <p><strong>Nom :</strong> {user.user_name}</p>
 
@@ -103,4 +103,3 @@ function Registrations() {
 }
 
 export default Registrations
-

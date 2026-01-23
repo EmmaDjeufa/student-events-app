@@ -1,4 +1,6 @@
+//api.js
 const BASE_URL = import.meta.env.VITE_BACKEND_URL
+console.log('🔥 BACKEND URL USED:', BASE_URL)
 
 export async function apiRequest(path, method = 'GET', body) {
   const token = localStorage.getItem('token')
