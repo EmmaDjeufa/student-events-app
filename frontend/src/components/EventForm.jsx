@@ -21,7 +21,7 @@ export default function EventForm({ onSuccess }) {
         title,
         description,
         date,
-        location, // envoyer le lieu
+        location, 
       })
 
       onSuccess()
