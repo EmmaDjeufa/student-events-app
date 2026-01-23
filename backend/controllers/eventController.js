@@ -84,7 +84,7 @@ exports.updateEvent = async (req, res) => {
           date = $3,
           time = $4,
           location = $5
-      WHERE id = $5
+      WHERE id = $6
       RETURNING *
       `,
       [title, description, date,time,location, req.params.id]
