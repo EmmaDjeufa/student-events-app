@@ -96,12 +96,11 @@ function App() {
           <Route
             path="/events/edit/:id"
             element={
-              <ProtectedRoute>
+              <AdminRoute>
                 <EditEvent />
-              </ProtectedRoute>
+              </AdminRoute>
             }
           />
-
           {/* Fallback */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

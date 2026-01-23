@@ -14,6 +14,8 @@ export default function EditEvent() {
   const [date, setDate] = useState('')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [time, setTime] = useState('')
+  const [location, setLocation] = useState('')
 
   useEffect(() => {
     async function loadEvent() {
@@ -22,6 +24,8 @@ export default function EditEvent() {
         setTitle(data.title)
         setDescription(data.description)
         setDate(data.date)
+        setTime(data.time || '')
+        setLocation(data.location || '')
       } catch (err) {
         setError('Impossible de récupérer l’événement.')
       } finally {
@@ -30,6 +34,7 @@ export default function EditEvent() {
     }
     loadEvent()
   }, [id])
+
     async function handleDelete(id) {
       if (!confirm('Supprimer cet événement ?')) return
       try {
@@ -41,15 +46,25 @@ export default function EditEvent() {
    }
 
 
-  const handleSubmit = async () => {
-    const formattedDate = new Date(dateInput).toISOString().split('T')[0] // yyyy-MM-dd
+  const handleSubmit = async (e) => {
+  e.preventDefault()
 
-    await apiRequest(`/events/${event.id}`, 'PUT', {
+  try {
+    await apiRequest(`/events/${id}`, 'PUT', {
       title,
       description,
-      date: formattedDate,
+      date,
+      time,
+      location,
     })
+    alert('Événement modifié avec succès.')
+    navigate('/dashboard')
+  } catch (err) {
+    console.error(err)
+    alert('Erreur lors de la modification : ' + err.message)
   }
+}
+
 
 
   if (loading) return <p className="p-6">Chargement...</p>
@@ -84,6 +99,24 @@ export default function EditEvent() {
           className="edit-event-input"
           required
         />
+        <label>Heure</label>
+        <input
+          type="time"
+          value={time}
+          onChange={e => setTime(e.target.value)}
+          className="edit-event-input"
+          required
+        />
+
+        <label>Lieu</label>
+        <input
+          type="text"
+          value={location}
+          onChange={e => setLocation(e.target.value)}
+          className="edit-event-input"
+          required
+        />
+
 
         <button type="submit" className="edit-event-btn">
           Modifier
