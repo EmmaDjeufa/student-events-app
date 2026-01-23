@@ -2,6 +2,7 @@ const pool = require('../config/db')
 const Event = require('../models/Event')
 
 // Tous les événements (avec location et email admin)
+
 exports.getAllEvents = async (req, res) => {
   try {
     const result = await pool.query(`
@@ -48,6 +49,51 @@ exports.getEventById = async (req, res) => {
     res.json(result.rows[0])
   } catch (err) {
     console.error(err)
+    res.status(500).json({ message: 'Erreur serveur' })
+  }
+}
+
+exports.createEvent = async (req, res) => {
+  const { title, description, date, location } = req.body
+  try {
+    const result = await pool.query(
+      `
+      INSERT INTO events (title, description, date, location, created_by)
+      VALUES ($1, $2, $3, $4, $5)
+      RETURNING *
+      `,
+      [title, description, date, location, req.user.id]
+    )
+    res.status(201).json(result.rows[0])
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({ message: 'Erreur lors de la création de l’événement' })
+  }
+}
+
+exports.updateEvent = async (req, res) => {
+  const { title, description, date, location } = req.body
+  try {
+    const result = await pool.query(
+      `
+      UPDATE events
+      SET title = $1,
+          description = $2,
+          date = $3,
+          location = $4
+      WHERE id = $5
+      RETURNING *
+      `,
+      [title, description, date, location, req.params.id]
+    )
+
+    if (!result.rows.length) {
+      return res.status(404).json({ message: 'Événement introuvable' })
+    }
+
+    res.json(result.rows[0])
+  } catch (err) {
+    console.error('UPDATE EVENT ERROR:', err)
     res.status(500).json({ message: 'Erreur serveur' })
   }
 }
