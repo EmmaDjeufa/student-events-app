@@ -31,7 +31,7 @@ function EventDetail() {
     }
 
     // Ici on n'inscrit PAS directement
-    alert(`Pour vous inscrire, contactez l'organisateur : ${event.admin_email}`)
+    alert(`Pour vous inscrire, contactez par email l'organisateur : ${event.admin_email}`)
   }
 
  return (
