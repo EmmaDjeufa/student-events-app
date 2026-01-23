@@ -37,7 +37,7 @@ export default function Home() {
           <div className="home-actions">
             <button
               className="home-btn primary"
-              href="/events" onClick={closeMenu}
+              to="/events" 
             >
               Explorer les événements
             </button>
