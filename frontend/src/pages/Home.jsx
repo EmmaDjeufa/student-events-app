@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { apiRequest } from "../api/api"; // pour récupérer les admins
 import "./css/Home.css";
 import heroImage from "../assets/party-illustration.jpg";
-import { Link, useNavigate } from 'react-router-dom''
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Home() {
   const [showAdminModal, setShowAdminModal] = useState(false);
