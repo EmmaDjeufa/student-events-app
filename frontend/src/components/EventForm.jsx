@@ -10,6 +10,7 @@ export default function EventForm({ onSuccess }) {
   const [location, setLocation] = useState('') // nouveau champ
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [time, setTime] = useState('')
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -21,6 +22,7 @@ export default function EventForm({ onSuccess }) {
         title,
         description,
         date,
+        time,
         location, 
       })
 
@@ -66,6 +68,12 @@ export default function EventForm({ onSuccess }) {
         placeholder="Lieu"
         value={location}
         onChange={e => setLocation(e.target.value)}
+        required
+      />
+      <input
+        type="time"
+        value={time}
+        onChange={e => setTime(e.target.value)}
         required
       />
 

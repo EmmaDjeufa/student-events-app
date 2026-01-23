@@ -11,6 +11,7 @@ exports.getAllEvents = async (req, res) => {
         events.title,
         events.description,
         events.date,
+        events.time,
         events.location,
         users.email AS admin_email
       FROM events
@@ -33,6 +34,7 @@ exports.getEventById = async (req, res) => {
         events.title,
         events.description,
         events.date,
+        events.time,
         events.location,
         users.email AS admin_email
       FROM events
@@ -54,15 +56,15 @@ exports.getEventById = async (req, res) => {
 }
 
 exports.createEvent = async (req, res) => {
-  const { title, description, date, location } = req.body
+  const { title, description, date, time, location } = req.body
   try {
     const result = await pool.query(
       `
-      INSERT INTO events (title, description, date, location, created_by)
+      INSERT INTO events (title, description, date,time, location, created_by)
       VALUES ($1, $2, $3, $4, $5)
       RETURNING *
       `,
-      [title, description, date, location, req.user.id]
+      [title, description, date, time, location, req.user.id]
     )
     res.status(201).json(result.rows[0])
   } catch (err) {
@@ -72,7 +74,7 @@ exports.createEvent = async (req, res) => {
 }
 
 exports.updateEvent = async (req, res) => {
-  const { title, description, date, location } = req.body
+  const { title, description, date,time, location } = req.body
   try {
     const result = await pool.query(
       `
@@ -80,11 +82,12 @@ exports.updateEvent = async (req, res) => {
       SET title = $1,
           description = $2,
           date = $3,
+          time = $4,
           location = $4
       WHERE id = $5
       RETURNING *
       `,
-      [title, description, date, location, req.params.id]
+      [title, description, date,time,location, req.params.id]
     )
 
     if (!result.rows.length) {

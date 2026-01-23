@@ -45,6 +45,9 @@ function EventDetail() {
       </p>
 
       <p className="event-description">{event.description}</p>
+      <p className="event-date-time">
+          {event.date} {event.time && `à ${event.time}`}
+      </p>
 
       {token ? (
         <p className="admin-contact">
