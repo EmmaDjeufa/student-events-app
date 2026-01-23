@@ -1,3 +1,4 @@
+//Registrations.jsx
 import { useEffect, useState } from 'react'
 import { apiRequest } from '../api/api'
 import './css/Registrations.css'
@@ -63,7 +64,7 @@ function Registrations() {
           {filtered.map(user => (
             <div key={user.id} className="registration-card">
               <img
-                src={user.avatar || '/default-avatar.png'}
+                src={user.avatar && user.avatar.startsWith('http') ? user.avatar : '/default-avatar.png'}
                 alt={user.user_name}
                 className="registration-avatar"
               />
