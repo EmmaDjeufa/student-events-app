@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom"
 export default function Home() {
   const [showAdminModal, setShowAdminModal] = useState(false);
   const [admins, setAdmins] = useState([]);
+  const navigate = useNavigate();
   const goToEvents = () => {
     navigate("/events");
   };
