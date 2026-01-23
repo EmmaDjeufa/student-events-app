@@ -7,6 +7,7 @@ export default function EventForm({ onSuccess }) {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [date, setDate] = useState('')
+  const [location, setLocation] = useState('') // nouveau champ
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -20,6 +21,7 @@ export default function EventForm({ onSuccess }) {
         title,
         description,
         date,
+        location, // envoyer le lieu
       })
 
       onSuccess()
@@ -56,6 +58,14 @@ export default function EventForm({ onSuccess }) {
         type="date"
         value={date}
         onChange={e => setDate(e.target.value)}
+        required
+      />
+
+      <input
+        type="text"
+        placeholder="Lieu"
+        value={location}
+        onChange={e => setLocation(e.target.value)}
         required
       />
 

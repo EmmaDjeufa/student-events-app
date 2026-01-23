@@ -30,19 +30,22 @@ function EventDetail() {
       return
     }
 
-    // Ici on n'inscrit PAS directement
     alert(`Pour vous inscrire, contactez par email l'organisateur : ${event.admin_email}`)
   }
 
- return (
+  return (
     <div className="event-detail-container">
       <h1>{event.title}</h1>
 
       <p className="event-date">{event.date}</p>
 
+      {/* Nouveau : afficher le lieu */}
+      <p className="event-location">
+        <strong>Lieu :</strong> {event.location || "Non précisé"}
+      </p>
+
       <p className="event-description">{event.description}</p>
 
-      {/* Email admin visible seulement si connecté */}
       {token ? (
         <p className="admin-contact">
           Contacter l'organisateur :{" "}
@@ -61,8 +64,6 @@ function EventDetail() {
       </button>
     </div>
   )
-
-
 }
 
 export default EventDetail
