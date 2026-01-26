@@ -4,6 +4,8 @@
 A full-stack web application for managing student events, registrations, and user profiles.  
 Administrators can create, edit, and delete events, while students can view events and register.
 
+code Admin : CYtech2026OK
+
 ## Live Demo
 [https://student-events-app-2.onrender.com]
 
