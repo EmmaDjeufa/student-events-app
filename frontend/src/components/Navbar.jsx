@@ -63,7 +63,7 @@ export default function Navbar() {
           {!token && (
             <>
               <Link to="/login" onClick={closeMenu}>Connexion</Link>
-              {userExists && <Link to="/register" onClick={closeMenu}>S'inscrire</Link>}
+              <Link to="/register" onClick={closeMenu}>S'inscrire</Link>
               <Link to="/admin-login" onClick={closeMenu} className="nav-admin">Admin</Link>
             </>
           )}

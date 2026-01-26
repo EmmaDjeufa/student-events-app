@@ -1,7 +1,7 @@
 //Register.jsx
 import { useState } from 'react'
 import { apiRequest } from '../api/api'
-import { useNavigate } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 import '../pages/css/Auth.css'
 
 export default function Register() {
@@ -67,7 +67,13 @@ export default function Register() {
         <button type="submit" disabled={loading}>
           {loading ? 'Chargement...' : 'S\'inscrire'}
         </button>
+        <p className="auth-footer">
+          Déjà inscrit, connectez-vous :{' '}
+          <Link to="/login" className="auth-link">Connexion</Link>
+        </p>
+
       </form>
+      
     </div>
   )
 }

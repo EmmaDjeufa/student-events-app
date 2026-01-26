@@ -26,7 +26,7 @@ function EventDetail() {
   const handleRegister = () => {
     if (!token) {
       alert("Vous devez être connecté pour vous inscrire.")
-      navigate('/login')
+      navigate('/register')
       return
     }
 
