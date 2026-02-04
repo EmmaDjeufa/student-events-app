@@ -42,7 +42,7 @@ function Registrations() {
     <div className="registrations-page">
       <h1>Liste des utilisateurs</h1>
       <p className="demo-text">
-        Le backend est hébergé sur Render (PostgreSQL). Service arrêté ? — voici une démo vidéo du projet en fonctionnement :  
+        Le backend est hébergé sur Render (PostgreSQL). Service arrêté ? En attendant son renouvellement —- voici une démo vidéo du projet en fonctionnement :  
         <a 
           href="https://youtu.be/wAm77QudYA8" 
           target="_blank" 
