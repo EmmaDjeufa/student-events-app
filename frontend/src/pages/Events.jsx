@@ -34,8 +34,19 @@ function Events() {
   }, [search, events])
 
   return (
-    <div className="events-container">
+    <div className="events-container">    
       <h1 className="events-title">Événements</h1>
+      <p className="demo-text">
+        Le backend est hébergé sur Render (PostgreSQL). Service arrêté ? — voici une démo vidéo du projet en fonctionnement :  
+        <a 
+          href="https://youtu.be/wAm77QudYA8" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="youtube-link"
+        >
+          Voir la vidéo YouTube 🎬
+        </a>
+      </p>
 
       {/* Barre de recherche */}
       <input
@@ -45,7 +56,6 @@ function Events() {
         onChange={e => setSearch(e.target.value)}
         className="search-input"
       />
-
       {loading && <p className="loading-text">Chargement des événements...</p>}
       {error && <p className="error-text">{error}</p>}
 

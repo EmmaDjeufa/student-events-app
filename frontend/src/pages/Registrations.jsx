@@ -41,7 +41,17 @@ function Registrations() {
   return (
     <div className="registrations-page">
       <h1>Liste des utilisateurs</h1>
-
+      <p className="demo-text">
+        Le backend est hébergé sur Render (PostgreSQL). Service arrêté ? — voici une démo vidéo du projet en fonctionnement :  
+        <a 
+          href="https://youtu.be/wAm77QudYA8" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="youtube-link"
+        >
+          Voir la vidéo YouTube 🎬
+        </a>
+      </p>
       {!token && (
         <p className="notice">
           Connectez-vous pour voir les informations complètes des utilisateurs !

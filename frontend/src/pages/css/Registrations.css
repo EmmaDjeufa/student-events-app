@@ -134,3 +134,22 @@
     padding: 0.5rem 0.9rem;
   }
 }
+
+.demo-text {
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.youtube-link {
+  color: #ff0000;        /* rouge YouTube */
+  font-weight: bold;
+  text-decoration: underline;
+  margin-left: 6px;
+  transition: 0.2s;
+}
+
+.youtube-link:hover {
+  color: #cc0000;
+  text-decoration: none;
+}
