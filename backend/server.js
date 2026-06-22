@@ -3,54 +3,80 @@ const express = require('express')
 const cors = require('cors')
 const path = require('path')
 const pool = require('./config/db')
-
 require('dotenv').config()
 
 const app = express()
 
-// Configuration CORS
-app.use(cors({
+/**
+ * =========================
+ * CORS CONFIG (PROPRE)
+ * =========================
+ */
+const allowedOrigins = [
+  'https://student-events-app-2.onrender.com', // frontend prod
+  'http://localhost:5173', // frontend local Vite
+]
+
+// Autoriser tous les GitHub Codespaces automatiquement
+const corsOptions = {
   origin: (origin, callback) => {
-    // Autoriser Postman, curl et requêtes serveur
+    // Postman / curl / mobile apps
     if (!origin) return callback(null, true)
 
-    const allowedOrigins = [
-      'https://student-events-app-2.onrender.com'
-    ]
+    // Origines autorisées fixes
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true)
+    }
 
-    // Autoriser tous les Codespaces GitHub
-    if (
-      allowedOrigins.includes(origin) ||
-      origin.includes('.app.github.dev')
-    ) {
+    // GitHub Codespaces (*.app.github.dev)
+    if (origin.includes('.app.github.dev')) {
       return callback(null, true)
     }
 
     console.log('❌ CORS BLOCKED:', origin)
-    callback(new Error('Not allowed by CORS'))
+    return callback(new Error('Not allowed by CORS'))
   },
+
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
-}))
+}
 
-// Réponse aux préflight requests
-app.options('*', cors())
+app.use(cors(corsOptions))
 
-// Middleware
+// IMPORTANT: gérer les preflight requests
+app.options('*', cors(corsOptions))
+
+/**
+ * =========================
+ * MIDDLEWARES
+ * =========================
+ */
 app.use(express.json())
 
-// Routes API
+/**
+ * =========================
+ * ROUTES API
+ * =========================
+ */
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/events', require('./routes/events'))
 app.use('/api/registrations', require('./routes/registrations'))
 app.use('/api/profile', require('./routes/profile'))
 app.use('/api/users', require('./routes/users'))
 
-// Fichiers statiques
+/**
+ * =========================
+ * STATIC FILES
+ * =========================
+ */
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
-// Route de test
+/**
+ * =========================
+ * HEALTH CHECK
+ * =========================
+ */
 app.get('/', (req, res) => {
   res.json({
     status: 'OK',
@@ -59,14 +85,22 @@ app.get('/', (req, res) => {
   })
 })
 
-// Démarrage serveur
+/**
+ * =========================
+ * START SERVER
+ * =========================
+ */
 const PORT = process.env.PORT || 5000
 
 app.listen(PORT, () => {
   console.log(`🚀 Backend running on port ${PORT}`)
 })
 
-// Vérification connexion DB
+/**
+ * =========================
+ * DATABASE CHECK
+ * =========================
+ */
 pool.query('SELECT NOW()')
   .then(() => console.log('✅ SUPABASE CONNECTED'))
   .catch(err => console.error('❌ DB ERROR', err))
