@@ -2,6 +2,7 @@
 const express = require('express')
 const cors = require('cors')
 const path = require('path')
+const pool = require('./config/db')
 require('dotenv').config()
 
 const app = express()
@@ -31,3 +32,6 @@ const PORT = process.env.PORT || 5000
 app.listen(PORT, () => {
   console.log(`🚀 Backend running on port ${PORT}`)
 })
+pool.query('SELECT NOW()')
+  .then(() => console.log('✅ SUPABASE CONNECTED'))
+  .catch(err => console.error('❌ DB ERROR', err))
