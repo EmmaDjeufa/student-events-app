@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { apiRequest } from '../api/api'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './css/Auth.css'
 
 function Login() {
@@ -48,6 +48,12 @@ function Login() {
         />
 
         <button type="submit">Connexion</button>
+        <p className="auth-footer">
+          Pas encore inscrit ?{' '}
+          <Link to="/register" className="auth-link">
+            Créer un compte
+          </Link>
+        </p>
       </form>
     </div>
   )

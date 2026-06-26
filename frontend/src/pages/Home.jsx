@@ -4,10 +4,14 @@ import "./css/Home.css";
 import heroImage from "../assets/party-illustration.jpg";
 import { Link, useNavigate } from "react-router-dom"
 
+
+
 export default function Home() {
   const [showAdminModal, setShowAdminModal] = useState(false);
   const [admins, setAdmins] = useState([]);
   const navigate = useNavigate();
+  const [loadingAdmins, setLoadingAdmins] = useState(true);
+  const [adminsError, setAdminsError] = useState(null);
   const goToEvents = () => {
     navigate("/events");
   };
@@ -16,17 +20,24 @@ export default function Home() {
   useEffect(() => {
     async function loadAdmins() {
       try {
+        setLoadingAdmins(true);
+
         const users = await apiRequest("/registrations/public");
         const adminList = users.filter(user => user.user_role === "admin");
+
         setAdmins(adminList);
       } catch (err) {
         console.error("Erreur récupération des admins:", err);
+        setAdminsError("Impossible de charger les administrateurs.");
+      } finally {
+        setLoadingAdmins(false);
       }
     }
+
     loadAdmins();
   }, []);
 
-  return (
+    return (
     <section className="home">
       <div className="home-inner">
         <div className="home-content">
@@ -75,13 +86,30 @@ export default function Home() {
           <div className="modal-content" onClick={e => e.stopPropagation()}>
             <h2>Contactez un administrateur</h2>
             <p>Pour créer un événement, veuillez contacter par email l'un des admins :</p>
-            <ul>
-              {admins.map(admin => (
-                <li key={admin.id}>
-                  {admin.user_name} - <a href={`mailto:${admin.user_email}`}>{admin.user_email}</a>
-                </li>
-              ))}
-            </ul>
+            {loadingAdmins && (
+              <p className="loading-text">
+                Chargement des administrateurs...
+              </p>
+            )}
+
+            {adminsError && (
+              <p className="error-text">
+                {adminsError}
+              </p>
+            )}
+
+            {!loadingAdmins && !adminsError && (
+              <ul>
+                {admins.map(admin => (
+                  <li key={admin.id}>
+                    {admin.user_name} -{" "}
+                    <a href={`mailto:${admin.user_email}`}>
+                      {admin.user_email}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
             <button className="home-btn primary" onClick={() => setShowAdminModal(false)}>
               Fermer
             </button>
