@@ -1,119 +1,372 @@
 /* =========================
+   PAGE
+========================= */
+
+.event-detail-page {
+  min-height: 100vh;
+  padding: 2rem 1.5rem 4rem;
+  background: #f7f8ff;
+}
+
+/* =========================
+   RETOUR
+========================= */
+
+.back-button {
+  display: block;
+  max-width: 850px;
+  margin: 0 auto 1.5rem;
+
+  background: transparent;
+  border: none;
+  color: #6b5cff;
+
+  font-size: 0.95rem;
+  font-weight: 600;
+
+  cursor: pointer;
+  padding: 0.5rem 0;
+
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.back-button:hover {
+  color: #5143d9;
+  transform: translateX(-3px);
+}
+
+/* =========================
    CONTENEUR PRINCIPAL
 ========================= */
+
 .event-detail-container {
-  max-width: 800px;
-  margin: 3rem auto;
-  padding: clamp(1.5rem, 4vw, 2.5rem);
-  background: #eef1ff;
+  width: 100%;
+  max-width: 850px;
+
+  margin: 0 auto;
+  padding: clamp(1.5rem, 5vw, 3rem);
+
+  background: #ffffff;
+
   border-radius: 1.5rem;
-  box-shadow: 0 10px 25px rgba(107, 92, 255, 0.15);
+
+  box-shadow:
+    0 15px 40px rgba(107, 92, 255, 0.12);
+
+  border: 1px solid #e8eaff;
+}
+
+/* =========================
+   EN-TÊTE
+========================= */
+
+.event-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.event-badge {
+  display: inline-block;
+
+  padding: 0.35rem 0.8rem;
+  margin-bottom: 0.8rem;
+
+  background: #eef1ff;
+  color: #6b5cff;
+
+  border-radius: 999px;
+
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.event-header h1 {
+  margin: 0;
+
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  line-height: 1.15;
+
+  font-weight: 800;
+  color: #1b1b2f;
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================
+   INFORMATIONS
+========================= */
+
+.event-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 1rem;
+
+  margin-bottom: 2.5rem;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+
+  padding: 1.2rem;
+
+  background: #f7f8ff;
+
+  border: 1px solid #e8eaff;
+  border-radius: 1rem;
+}
+
+.info-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 2.5rem;
+  height: 2.5rem;
+
+  flex-shrink: 0;
+
+  background: #eef1ff;
+  border-radius: 0.8rem;
+
+  font-size: 1.2rem;
+}
+
+.info-item div {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  gap: 0.25rem;
+
+  min-width: 0;
 }
 
-/* TITRE */
-.event-detail-container h1 {
-  font-size: clamp(1.8rem, 4vw, 2.4rem);
-  font-weight: 800;
-  color: #6b5cff;
-  margin-bottom: 1rem;
+.info-label {
+  color: #6b7280;
+
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
-/* DATE */
-.event-detail-container .event-date {
-  font-size: 0.95rem;
-  color: #7fd1ff;
-  margin-bottom: 1.5rem;
-}
-
-/* DESCRIPTION */
-.event-description {
-  font-size: 1.05rem;
+.info-item strong {
   color: #1b1b2f;
-  line-height: 1.6;
-  margin-bottom: 2rem;
-  max-width: 600px;
+
+  font-size: 0.95rem;
+  line-height: 1.4;
+
+  overflow-wrap: anywhere;
 }
 
-/* CONTACT ADMIN */
-.admin-contact {
+/* =========================
+   DESCRIPTION
+========================= */
+
+.event-content {
+  margin-bottom: 2.5rem;
+}
+
+.event-content h2 {
+  margin: 0 0 1rem;
+
+  color: #1b1b2f;
+
+  font-size: 1.25rem;
+  font-weight: 750;
+}
+
+.event-description {
+  margin: 0;
+
+  color: #4b5563;
+
+  font-size: 1.05rem;
+  line-height: 1.8;
+
+  white-space: pre-line;
+}
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
   margin-bottom: 2rem;
-  font-size: 1rem;
-  color: #374151;
+  padding: 1.2rem;
+
+  background: #faf9ff;
+
+  border: 1px solid #ebe8ff;
+  border-radius: 1rem;
+}
+
+.contact-icon {
+  font-size: 1.3rem;
+}
+
+.admin-contact {
+  margin: 0.25rem 0 0;
 }
 
 .admin-contact a {
   color: #6b5cff;
+
   font-weight: 600;
   text-decoration: none;
-  transition: color 0.3s ease;
+
+  overflow-wrap: anywhere;
+
+  transition: color 0.2s ease;
 }
 
 .admin-contact a:hover {
-  color: #8f84ff;
+  color: #5143d9;
   text-decoration: underline;
 }
 
-/* MESSAGE NON CONNECTÉ */
 .admin-warning {
-  margin-bottom: 2rem;
-  font-size: 0.95rem;
-  color: #ef4444;
+  margin: 0;
+
+  color: #b91c1c;
+
+  font-size: 0.9rem;
   font-style: italic;
 }
 
-/* BOUTON INSCRIPTION */
+/* =========================
+   ACTION
+========================= */
+
+.event-actions {
+  display: flex;
+  justify-content: center;
+
+  padding-top: 0.5rem;
+}
+
 .btn-primary {
-  background: linear-gradient(135deg, #6b5cff, #8f84ff);
-  color: white;
+  width: 100%;
+  max-width: 380px;
+
+  padding: 0.9rem 1.5rem;
+
+  background: linear-gradient(
+    135deg,
+    #6b5cff,
+    #8f84ff
+  );
+
+  color: #ffffff;
+
+  font-size: 1rem;
   font-weight: 700;
-  padding: 0.7rem 2rem;
-  border-radius: 9999px;
+
   border: none;
+  border-radius: 9999px;
+
   cursor: pointer;
-  transition: all 0.3s ease;
+
+  box-shadow:
+    0 8px 20px rgba(107, 92, 255, 0.25);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px) scale(1.04);
-  box-shadow: 0 10px 25px rgba(107, 92, 255, 0.35);
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 25px rgba(107, 92, 255, 0.35);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
 }
 
 /* =========================
-   RESPONSIVE TABLETTE
+   CHARGEMENT / ERREUR
 ========================= */
+
+.loading-text,
+.error-text {
+  text-align: center;
+  margin: 3rem auto;
+  color: #6b7280;
+}
+
+.error-text {
+  color: #dc2626;
+}
+
+/* =========================
+   TABLETTE
+========================= */
+
 @media (max-width: 768px) {
+  .event-detail-page {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .event-info {
+    grid-template-columns: 1fr;
+  }
+
   .event-detail-container {
-    max-width: 90%;
     padding: 1.5rem;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 480px) {
+  .event-detail-page {
+    padding: 1rem 0.75rem 2rem;
+  }
+
+  .event-detail-container {
+    padding: 1.25rem;
+
+    border-radius: 1.2rem;
+  }
+
+  .event-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .event-header h1 {
+    font-size: 1.7rem;
+  }
+
+  .event-info {
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .info-item {
+    padding: 1rem;
   }
 
   .event-description {
-    font-size: 1rem;
+    font-size: 0.98rem;
+    line-height: 1.7;
+  }
+
+  .contact-section {
+    align-items: flex-start;
   }
 
   .btn-primary {
-    width: 100%;
-  }
-}
-
-/* =========================
-   RESPONSIVE MOBILE
-========================= */
-@media (max-width: 480px) {
-  .event-detail-container {
-    margin: 2rem auto;
-    padding: 1.2rem;
-  }
-
-  .event-detail-container h1 {
-    font-size: 1.6rem;
-  }
-
-  .event-description {
-    font-size: 0.95rem;
+    max-width: none;
   }
 }

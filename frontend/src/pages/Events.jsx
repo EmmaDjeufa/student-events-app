@@ -25,7 +25,7 @@ function Events() {
       })
   }, [])
 
-  // 🔎 Filtrage alphabétique
+  // 🔎 Filtrage par titre
   useEffect(() => {
     const f = events.filter(event =>
       event.title.toLowerCase().includes(search.toLowerCase())
@@ -33,10 +33,24 @@ function Events() {
     setFiltered(f)
   }, [search, events])
 
+  // 📅 Formatage de la date et de l'heure
+  const formatDate = (date) => {
+    if (!date) return ''
+
+    return new Date(date).toLocaleString('fr-FR', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+    }).replace(' à ', ' à ')
+  }
+
+
   return (
-    <div className="events-container">    
-      <h1 className="events-title">Événements</h1>
-     
+    <div className="events-container">
+      <h1 className="events-title">Envie de participer aux activités de l'école?</h1>
 
       {/* Barre de recherche */}
       <input
@@ -46,19 +60,33 @@ function Events() {
         onChange={e => setSearch(e.target.value)}
         className="search-input"
       />
-      {loading && <p className="loading-text">Chargement des événements...</p>}
-      {error && <p className="error-text">{error}</p>}
+
+      {loading && (
+        <p className="loading-text">
+          Chargement des événements...
+        </p>
+      )}
+
+      {error && (
+        <p className="error-text">
+          {error}
+        </p>
+      )}
 
       {!loading && !error && (
         <div className="events-grid">
-          {filtered.length === 0 && <p>Aucun événement trouvé.</p>}
+          {filtered.length === 0 && (
+            <p>Aucun événement trouvé.</p>
+          )}
 
           {filtered.map(event => (
             <div key={event.id} className="event-card">
               <h2>{event.title}</h2>
 
-              {/* ❌ On ne montre PLUS la description ici */}
-              <p className="event-date">{event.date}</p>
+              {/* 📅 Date + heure au format français */}
+              <p className="event-date">
+                {formatDate(event.date)}
+              </p>
 
               <button
                 className="btn-secondary"
@@ -75,3 +103,4 @@ function Events() {
 }
 
 export default Events
+

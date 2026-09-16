@@ -20,8 +20,33 @@ function EventDetail() {
       })
   }, [id])
 
-  if (error) return <p className="error-text">{error}</p>
-  if (!event) return <p>Chargement...</p>
+  // 📅 Formatage de la date et de l'heure
+  const formatDate = (date) => {
+    if (!date) return ''
+
+    const formattedDate = new Date(date)
+
+    if (isNaN(formattedDate.getTime())) {
+      return date
+    }
+
+    return formattedDate.toLocaleString('fr-FR', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+    })
+  }
+
+  if (error) {
+    return <p className="error-text">{error}</p>
+  }
+
+  if (!event) {
+    return <p className="loading-text">Chargement...</p>
+  }
 
   const handleRegister = () => {
     if (!token) {
@@ -30,42 +55,102 @@ function EventDetail() {
       return
     }
 
-    alert(`Pour vous inscrire, contactez par email l'organisateur : ${event.admin_email}`)
+    alert(
+      `Pour vous inscrire, contactez par email l'organisateur : ${event.admin_email}`
+    )
   }
 
   return (
-    <div className="event-detail-container">
-      <h1>{event.title}</h1>
+    <main className="event-detail-page">
 
-      <p className="event-date">{event.date}</p>
-
-      {/* Nouveau : afficher le lieu */}
-      <p className="event-location">
-        <strong>Lieu :</strong> {event.location || "Non précisé"}
-      </p>
-
-      <p className="event-description">{event.description}</p>
-      <p className="event-date-time">
-          {event.date} {event.time && `à ${event.time}`}
-      </p>
-
-      {token ? (
-        <p className="admin-contact">
-          Contacter l'organisateur :{" "}
-          <a href={`mailto:${event.admin_email}`}>
-            {event.admin_email}
-          </a>
-        </p>
-      ) : (
-        <p className="admin-warning">
-          🔒 Connectez-vous pour voir l'email de l'organisateur.
-        </p>
-      )}
-
-      <button className="btn-primary" onClick={handleRegister}>
-        S'inscrire
+      {/* Retour */}
+      <button
+        className="back-button"
+        onClick={() => navigate('/events')}
+      >
+        ← Retour aux événements
       </button>
-    </div>
+
+      <section className="event-detail-container">
+
+        {/* En-tête */}
+        <header className="event-header">
+          <span className="event-badge">ÉVÉNEMENT</span>
+
+          <h1>{event.title}</h1>
+        </header>
+
+        {/* Informations principales */}
+        <div className="event-info">
+
+          <div className="info-item">
+            <span className="info-icon">📅</span>
+            <div>
+              <span className="info-label">Date et heure</span>
+              <strong>{formatDate(event.date)}</strong>
+            </div>
+          </div>
+
+          <div className="info-item">
+            <span className="info-icon">📍</span>
+            <div>
+              <span className="info-label">Lieu</span>
+              <strong>
+                {event.location || 'Non précisé'}
+              </strong>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Description */}
+        <div className="event-content">
+          <h2>À propos de l'événement</h2>
+
+          <p className="event-description">
+            {event.description || 'Aucune description disponible.'}
+          </p>
+        </div>
+
+        {/* Contact */}
+        <div className="contact-section">
+
+          {token ? (
+            <>
+              <span className="contact-icon">✉️</span>
+
+              <div>
+                <span className="info-label">
+                  Organisateur
+                </span>
+
+                <p className="admin-contact">
+                  <a href={`mailto:${event.admin_email}`}>
+                    {event.admin_email}
+                  </a>
+                </p>
+              </div>
+            </>
+          ) : (
+            <p className="admin-warning">
+              🔒 Connectez-vous pour voir l'email de l'organisateur.
+            </p>
+          )}
+
+        </div>
+
+        {/* Action */}
+        <div className="event-actions">
+          <button
+            className="btn-primary"
+            onClick={handleRegister}
+          >
+            S'inscrire à l'événement
+          </button>
+        </div>
+
+      </section>
+    </main>
   )
 }
 

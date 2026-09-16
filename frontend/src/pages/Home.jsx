@@ -46,7 +46,7 @@ export default function Home() {
           </h1>
 
           <p className="home-subtitle">
-            Découvrez, créez et participez aux meilleurs événements étudiants de notre groupe de classe.
+            Découvrez, créez et participez aux meilleurs événements étudiants de nos groupes de classes y compris aux sessions de révisions de votre choix.
           </p>
 
           <div className="home-actions">
