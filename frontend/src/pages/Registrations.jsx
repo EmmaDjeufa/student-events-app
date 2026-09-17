@@ -40,7 +40,7 @@ function Registrations() {
 
   return (
     <div className="registrations-page">
-      <h1>Ils sont déjà inscrits et pas vous!</h1>
+      <h1>Ils sont déjà inscrits et pas toi!</h1>
       
       {!token && (
         <p className="notice">
